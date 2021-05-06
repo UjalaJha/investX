@@ -1,0 +1,7 @@
+{
+  "name": "investX",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
