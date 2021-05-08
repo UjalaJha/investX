@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+  	<ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>View Your PPF Investment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-card *ngFor="let data of data">
+		<ion-item>
+			<b>{{data.investment_title}}</b>
+			<ion-button shape="round" slot="end" (click)="deleteInvestment(data.id)"><ion-icon name="trash" ></ion-icon></ion-button>
+		</ion-item>
+		<ion-item>
+			<b>Amount</b> : {{data.investment_amount}}
+		</ion-item>
+		<ion-item>
+	    <b>Type</b> : {{data.investment_type}}
+  	</ion-item>
+		<ion-item>
+			<b>App invested on</b> : {{data.investment_app}}
+		</ion-item>
+		<ion-item>
+		  <b>Started on</b> : {{data.investment_started_on | date}}
+		</ion-item>
+		<ion-item>
+		  <b>Maturing on</b> : {{data.investment_maturing_on | date}}
+		</ion-item>
+		<ion-item>
+		  <b>Expected ROI</b> : {{data.investment_interest_rate}}%
+		</ion-item>
+		<ion-item>
+			<b>More Information</b> : {{data.investment_more_info}}
+		</ion-item>
+	</ion-card>
+</ion-content>

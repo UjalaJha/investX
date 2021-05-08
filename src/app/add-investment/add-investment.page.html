@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="primary">
+  	<ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Your PPF Investment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<form [formGroup]="mainForm" (ngSubmit)="storeData()">
+		<ion-card>
+			<ion-item>
+				<ion-input placeholder="Enter Title of Investment" formControlName="investment_title" type="text"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-input placeholder="Enter Amount Invested" formControlName="investment_amount" type="number"></ion-input>
+			</ion-item>
+			<ion-item>
+			    <ion-select placeholder="Type" formControlName="investment_type">
+			      <ion-select-option value="ppf">PPF</ion-select-option>
+			      <ion-select-option value="epf">EPF</ion-select-option>
+			      <ion-select-option value="vpf">VPF</ion-select-option>
+			    </ion-select>
+	  		</ion-item>
+			<ion-item>
+				<ion-input placeholder="App Invested On" type="text" formControlName="investment_app"></ion-input>
+			</ion-item>
+			<ion-item>
+			  <ion-datetime placeholder="Started On" formControlName="investment_started_on"></ion-datetime>
+			</ion-item>
+			<ion-item>
+			  <ion-datetime placeholder="Maturing On (Optional)" formControlName="investment_maturing_on"></ion-datetime>
+			</ion-item>
+			<ion-item>
+			  <ion-input placeholder="Expected Rate of Interest %" formControlName="investment_interest_rate"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-textarea placeholder="Enter more information here..." formControlName="investment_more_info"></ion-textarea>
+			</ion-item>
+		</ion-card>
+		<section>
+			<ion-button type="submit" expand="block">Add Investment</ion-button>
+		</section>
+	</form>
+</ion-content>
+
