@@ -131,6 +131,7 @@ export class DbService {
   // Delete
   deleteInvestment(id,investment_name)  {
   	this.investment_name=investment_name;
+  	console.log("delete investment_name : ",this.investment_name);
     return this.storage.executeSql('DELETE FROM investment WHERE id = ?', [id])
     .then(res=> {
     	console.log("In delete Investment :",res);

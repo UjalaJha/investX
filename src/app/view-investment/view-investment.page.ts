@@ -37,8 +37,8 @@ export class ViewInvestmentPage implements OnInit {
 	    }
 	  });
   }
-  deleteInvestment(id,investment_name){
-    this.db.deleteInvestment(id,investment_name).then(async(res) => {
+  deleteInvestment(id,){
+    this.db.deleteInvestment(id,this.investment_name).then(async(res) => {
       let toast = await this.toast.create({
         message: 'Investment deleted',
         duration: 2500
