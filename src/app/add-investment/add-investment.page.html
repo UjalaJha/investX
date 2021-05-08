@@ -17,10 +17,8 @@
 				<ion-input placeholder="Enter Amount Invested" formControlName="investment_amount" type="number"></ion-input>
 			</ion-item>
 			<ion-item>
-			    <ion-select placeholder="Type" formControlName="investment_type">
-			      <ion-select-option value="ppf">PPF</ion-select-option>
-			      <ion-select-option value="epf">EPF</ion-select-option>
-			      <ion-select-option value="vpf">VPF</ion-select-option>
+			    <ion-select placeholder="Type" formControlName="investment_type" >
+			      <ion-select-option *ngFor="let entry of data | keyvalue" value="{{entry.key}}">{{entry.value}}</ion-select-option>
 			    </ion-select>
 	  		</ion-item>
 			<ion-item>

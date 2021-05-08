@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class AddInvestmentPage implements OnInit {
 	investment_name:any;
 	mainForm: FormGroup;
-  Data: any[] = []
+  data: any;
 
   constructor(
   	private db: DbService,
@@ -26,6 +26,62 @@ export class AddInvestmentPage implements OnInit {
 	  } 
 
   ngOnInit() {
+  	let map = new Map();
+		switch (this.investment_name) {
+		    case 'pf':
+		   			map.set("ppf","PPF");
+						map.set("epf","EPF");
+						map.set("vpf","VPF");
+						this.data=map;
+		   			console.log("Data of Type : ",this.data);
+		        break;
+		    case 'mf':
+						map.set("liquid","Liquid");
+						map.set("debt","Debt");
+						map.set("equity","Equity");
+						this.data=map;
+		   			console.log("Data of Type : ",this.data);
+		        break;
+		    case 'bkd':
+		        console.log("It is a Tuesday.");
+		        break;
+		    case 'cc':
+		        console.log("It is a Wednesday.");
+		        break;
+		    case 'ss':
+		        console.log("It is a Thursday.");
+		        break;
+		    case 'cd':
+		        console.log("It is a Friday.");
+		        break;
+		    case 'bd':
+		        console.log("It is a Saturday.");
+		        break;
+	     	case 'lic':
+	        console.log("It is a Saturday.");
+	        break;
+	      case 'ins':
+	        console.log("It is a Saturday.");
+	        break;
+	      case 'etf':
+	        console.log("It is a Saturday.");
+	        break;
+	      case 'ret':
+	        console.log("It is a Saturday.");
+	        break;
+	      case 'chf':
+	        console.log("It is a Saturday.");
+	        break;
+	      case 'gvt':
+	        console.log("It is a Saturday.");
+	        break;
+	      case 'oth':
+	        console.log("It is a Saturday.");
+	        break;
+		    default:
+		        console.log("No such day exists!");
+		        break;
+		}
   	this.mainForm = this.formBuilder.group({
       id: [''],
       investment_name: [''],
