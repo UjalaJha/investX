@@ -13,6 +13,7 @@ export class AddInvestmentPage implements OnInit {
 	investment_name:any;
 	mainForm: FormGroup;
   data: any;
+  investment_full_name:string;
 
   constructor(
   	private db: DbService,
@@ -33,53 +34,78 @@ export class AddInvestmentPage implements OnInit {
 						map.set("epf","EPF");
 						map.set("vpf","VPF");
 						this.data=map;
+						this.investment_full_name="Provident Fund";
 		   			console.log("Data of Type : ",this.data);
 		        break;
 		    case 'mf':
 						map.set("liquid","Liquid");
 						map.set("debt","Debt");
 						map.set("equity","Equity");
+						map.set("hybrid","Hybrid");
+						map.set("solutionoriented","SolutionOriented");
 						this.data=map;
+						this.investment_full_name="Mutual Fund";
 		   			console.log("Data of Type : ",this.data);
 		        break;
 		    case 'bkd':
-		        console.log("It is a Tuesday.");
+		        map.set("fixeddeposit","FixedDeposit");
+						map.set("recurringdeposit","RecurringDeposit");
+						this.investment_full_name="Bank Deposit";
+						this.data=map;
 		        break;
 		    case 'cc':
-		        console.log("It is a Wednesday.");
+		        map.set("bitcoin","Bitcoin");
+						map.set("ether","Ether");
+						map.set("dogecoin","Dogecoin");
+						map.set("others","Others");
+						this.data=map;
+						this.investment_full_name="CryptoCurrency";
 		        break;
 		    case 'ss':
+		    		map.set("usstock","USStock");
+		    		map.set("indiastock","IndiaStock");
+		    		this.data=map;
+		    		this.investment_full_name="Stocks and Shares";
 		        console.log("It is a Thursday.");
 		        break;
 		    case 'cd':
-		        console.log("It is a Friday.");
+		        this.data=null;
+		        this.investment_full_name="Commodity"
 		        break;
 		    case 'bd':
-		        console.log("It is a Saturday.");
+		        this.data=null;
+		        this.investment_full_name="Bonds"
 		        break;
 	     	case 'lic':
-	        console.log("It is a Saturday.");
-	        break;
+		        this.data=null;
+		        this.investment_full_name="LIC"
+		        break;
 	      case 'ins':
-	        console.log("It is a Saturday.");
-	        break;
+		        this.data=null;
+		        this.investment_full_name="Insurance";
+		        break;
 	      case 'etf':
-	        console.log("It is a Saturday.");
-	        break;
+	        	this.data=null;
+	        	this.investment_full_name="ETF";
+		        break;
 	      case 'ret':
-	        console.log("It is a Saturday.");
-	        break;
+	      		this.investment_full_name="Retirement Fund"
+	        	this.data=null;
+		        break;
 	      case 'chf':
-	        console.log("It is a Saturday.");
-	        break;
+	      		this.investment_full_name="Child Futures"
+	        	this.data=null;
+		        break;
 	      case 'gvt':
-	        console.log("It is a Saturday.");
-	        break;
+	      		this.investment_full_name="Government Funds"
+	        	this.data=null;
+		        break;
 	      case 'oth':
-	        console.log("It is a Saturday.");
-	        break;
+	      		this.investment_full_name="Other";
+	        	this.data=null;
+		        break;	
 		    default:
-		        console.log("No such day exists!");
+		        this.data=null;
 		        break;
 		}
   	this.mainForm = this.formBuilder.group({

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Investment } from './investment';
+import { InvestmentOverview } from './investment-overview';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 
@@ -11,6 +12,7 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 export class DbService {
   private storage: SQLiteObject;
   investmentList = new BehaviorSubject([]);
+  investmentOverviewList = new BehaviorSubject([]);
   investment_name:string;
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
@@ -56,6 +58,12 @@ export class DbService {
   	this.getinvestments();
     return this.investmentList.asObservable();
   }
+  fetchInvestmentsDetails(): Observable<InvestmentOverview[]> {
+  	console.log("In fetch Investment Details : ");
+  	this.getInvestmentsDetails();
+    return this.investmentOverviewList.asObservable();
+  }
+
 
   // Get list
   getinvestments(){
@@ -84,6 +92,26 @@ export class DbService {
       this.investmentList.next(items);
     }).catch(e => console.log(e));
   }
+  getInvestmentsDetails(){
+  	var sqlQuery: string = `SELECT SUM(investment_amount) as sum, COUNT(*) as num, investment_name
+  	FROM investment GROUP BY investment_name`;
+  	console.log("SQL Query : ",sqlQuery)
+    return this.storage.executeSql(sqlQuery, []).then(res => {
+    	console.log("In Get Investments Details : ",res);
+      let items: InvestmentOverview[] = [];
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) { 
+          items.push({ 
+            investment_name: res.rows.item(i).investment_name,  
+            investment_amount: res.rows.item(i).sum,
+				    investment_num: res.rows.item(i).num
+				 });
+        }
+      }
+      this.investmentOverviewList.next(items);
+    }).catch(e => console.log(e));
+  }
+
 
   // Add
   addInvestment(investment_name, investment_title,investment_amount,investment_type,investment_app,
@@ -97,6 +125,7 @@ export class DbService {
     .then(res => {
     	console.log("In Add Investment : ",res);
     	this.getinvestments();
+    	this.getInvestmentsDetails();
       return res;
     });
   }
@@ -136,6 +165,7 @@ export class DbService {
     .then(res=> {
     	console.log("In delete Investment :",res);
       this.getinvestments();
+      this.getInvestmentsDetails();
     });
   }
 }

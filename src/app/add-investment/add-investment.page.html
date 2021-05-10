@@ -3,7 +3,7 @@
   	<ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>Add Your PPF Investment</ion-title>
+    <ion-title>Add Your {{investment_full_name}} Investment</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,7 +16,7 @@
 			<ion-item>
 				<ion-input placeholder="Enter Amount Invested" formControlName="investment_amount" type="number"></ion-input>
 			</ion-item>
-			<ion-item>
+			<ion-item *ngIf="data">
 			    <ion-select placeholder="Type" formControlName="investment_type" >
 			      <ion-select-option *ngFor="let entry of data | keyvalue" value="{{entry.key}}">{{entry.value}}</ion-select-option>
 			    </ion-select>

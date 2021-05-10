@@ -3,7 +3,7 @@
   	<ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>View Your PPF Investment</ion-title>
+    <ion-title>View Your Investment</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +14,7 @@
 			<ion-button shape="round" slot="end" (click)="deleteInvestment(data.id)"><ion-icon name="trash" ></ion-icon></ion-button>
 		</ion-item>
 		<ion-item>
-			<b>Amount</b> : {{data.investment_amount}}
+			<b>Amount</b> : {{data.investment_amount | number}}
 		</ion-item>
 		<ion-item>
 	    <b>Type</b> : {{data.investment_type}}
