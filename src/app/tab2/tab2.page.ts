@@ -31,7 +31,7 @@ export class Tab2Page {
         "rgba(255, 159, 64, 0.2)"
       ],
       hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB", "#FFCE56"],
-      hoverOffset: 4,
+      hoverOffset: 10,
       borderColor: "#fff"
   	}];
         
