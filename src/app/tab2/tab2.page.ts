@@ -61,6 +61,10 @@ export class Tab2Page {
 	  });
   }
   ionViewDidEnter(){
+  	const numberWithCommas = x => {
+		  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		  // return Number(x).toLocaleString();
+		};
   	let ctx = this.pieCanvas.nativeElement;
 		var myChart = new Chart(ctx, {
 		  type: 'pie',
@@ -69,14 +73,14 @@ export class Tab2Page {
 		    datasets: [{
 		      backgroundColor: this.dataColour,
 		      data: this.dataAmount,
-		      hoverBorderWidth: 5,
-		      borderColor: 'transparent',
 		    }]
 		  },
 		  options: {
 		    title: {
 		      display: true,
 		      text: 'Investment in Various Portfolios',
+		      fontStyle: 'bold',
+      		fontSize: 20
 		    },
 		    legend: {
 		      display: true,
@@ -88,6 +92,15 @@ export class Tab2Page {
 		      }
 		    },
 		    rotation: 3.9,
+		    tooltips: {
+		      callbacks: {
+		       	label: (tooltipItem, data) => {
+		          const value =
+		          data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+		          return data.labels[tooltipItem.index] + " : " +numberWithCommas(value);
+		        }
+		      }
+		    }
 		  },
 		  plugins: [{
 		    beforeInit: function(chart, options) {
