@@ -24,9 +24,9 @@ export class Tab1Page {
           this.mapNum.clear();
           this.mapAmount.clear();
           for (var i = 0; i < item.length; i++) {  
-          		console.log("Item Single:",item[0].investment_name);
-          		this.mapAmount.set(item[0].investment_name,item[0].investment_amount);
-							this.mapNum.set(item[0].investment_name,item[0].investment_num);
+          		console.log("Item Single:",item[i].investment_name);
+          		this.mapAmount.set(item[i].investment_name,item[i].investment_amount);
+							this.mapNum.set(item[i].investment_name,item[i].investment_num);
 	      	}
 	      });
 	    }

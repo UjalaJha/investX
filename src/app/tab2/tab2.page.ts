@@ -12,8 +12,10 @@ import { Router } from '@angular/router';
 })
 export class Tab2Page {
 	data: InvestmentOverview[]=[];
-	mapAmount = new Map();
-  mapNum = new Map();
+	dataAmount = [];
+  dataNum = [];
+  dataName=[];
+  dataColour=[];
   
 
 	@ViewChild("pieCanvas",{static:true}) pieCanvas: ElementRef;
@@ -28,12 +30,31 @@ export class Tab2Page {
 	    if(res){
 	      this.db.fetchInvestmentsDetails().subscribe(item => {
           console.log("In getInvestmentsDetails : ",item);
-          this.mapNum.clear();
-          this.mapAmount.clear();
+          var chartColors = {
+					  pf: 'rgb(255, 168, 96)',
+					  mf: 'rgb(168, 216, 168)',
+					  bkd: 'rgb(96, 192, 168)',
+						cc: 'rgb(48, 144, 192)',
+						ss: 'rgb(240, 240, 168)',
+						cd: 'rgb(240, 120, 72)',
+						bd: 'rgb(192, 216, 144)',
+						lic: 'rgb(144, 192, 216)',
+						ins: 'rgb(240, 168, 144)',
+						etf: 'rgb(240, 216, 168)',
+						ret: 'rgb(192, 168, 192)',
+						chf: 'rgb(0, 72, 96)',
+						gvt: 'rgb(72, 168, 168)',
+						oth: 'rgb(216, 216, 192)',
+					};
+					this.dataAmount = [];
+				  this.dataNum = [];
+				  this.dataName=[];
+				  this.dataColour=[];
           for (var i = 0; i < item.length; i++) {  
-          		console.log("Item Single:",item[0].investment_name);
-          		this.mapAmount.set(item[0].investment_name,item[0].investment_amount);
-							this.mapNum.set(item[0].investment_name,item[0].investment_num);
+          		this.dataName.push(item[i].investment_name);
+          		this.dataAmount.push(item[i].investment_amount);
+          		var colour=item[i].investment_name;
+          		this.dataColour.push(chartColors[colour]);
 	      	}
 	      });
 	    }
@@ -41,21 +62,13 @@ export class Tab2Page {
   }
   ionViewDidEnter(){
   	let ctx = this.pieCanvas.nativeElement;
-		ctx.height = 400;
-
-
-  	var chartColors = {
-		  red: 'rgb(255, 99, 132)',
-		  blue: 'rgb(54, 162, 235)'
-		};
-
 		var myChart = new Chart(ctx, {
 		  type: 'pie',
 		  data: {
-		    labels: ["Label 1", "Label 2"],
+		    labels: this.dataName,
 		    datasets: [{
-		      backgroundColor: [chartColors.red, chartColors.blue],
-		      data: [4, 7],
+		      backgroundColor: this.dataColour,
+		      data: this.dataAmount,
 		      hoverBorderWidth: 5,
 		      borderColor: 'transparent',
 		    }]
@@ -78,7 +91,7 @@ export class Tab2Page {
 		  },
 		  plugins: [{
 		    beforeInit: function(chart, options) {
-		      console.log('yolo');
+		     
 		    }
 		  }]
 		});
