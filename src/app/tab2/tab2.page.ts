@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Chart } from "chart.js";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { DbService } from './../services/db.service';
+import { InvestmentOverview } from '../services/investment-overview';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -8,67 +11,77 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+	data: InvestmentOverview[]=[];
+	mapAmount = new Map();
+  mapNum = new Map();
+  
 
 	@ViewChild("pieCanvas",{static:true}) pieCanvas: ElementRef;
 	private pieChart: Chart;
 
-  constructor( ) {
-  	
+	constructor(private db: DbService,private router: Router){
   }
 
+  ngOnInit(){
+  	this.db.dbState().subscribe((res) => {
+      console.log("In Tab1Page dbState : ",res);
+	    if(res){
+	      this.db.fetchInvestmentsDetails().subscribe(item => {
+          console.log("In getInvestmentsDetails : ",item);
+          this.mapNum.clear();
+          this.mapAmount.clear();
+          for (var i = 0; i < item.length; i++) {  
+          		console.log("Item Single:",item[0].investment_name);
+          		this.mapAmount.set(item[0].investment_name,item[0].investment_amount);
+							this.mapNum.set(item[0].investment_name,item[0].investment_num);
+	      	}
+	      });
+	    }
+	  });
+  }
   ionViewDidEnter(){
   	let ctx = this.pieCanvas.nativeElement;
 		ctx.height = 400;
-		var data = [{
-      data: [12, 19, 3, 5, 2, 3],
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-      backgroundColor: [
-        "rgba(255, 99, 132, 0.2)",
-        "rgba(54, 162, 235, 0.2)",
-        "rgba(255, 206, 86, 0.2)",
-        "rgba(75, 192, 192, 0.2)",
-        "rgba(153, 102, 255, 0.2)",
-        "rgba(255, 159, 64, 0.2)"
-      ],
-      hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB", "#FFCE56"],
-      hoverOffset: 10,
-      borderColor: "#fff"
-  	}];
-        
-   	var options = {
-	   	tooltips: {
-	 			enabled: false
-	    },
-	    responsive:true,
-			animation: {
-				duration: 1000
-			},
-			plugins: {
-			datalabels: {
-				formatter: (value, ctx) => {
-			  	let sum = 0;
-			    let dataArr = ctx.chart.data.datasets[0].data;
-			    dataArr.map(data => {
-			        sum += data;
-			    });
-			    let percentage = (value*100 / sum).toFixed(2)+"%";
-			    return percentage;
-				},
-			  color: '#fff',
-				}
-			}
-		}
-   
-    
-  	new Chart(ctx, {
-  		plugins: [ChartDataLabels],
-      type: "pie",
-    	data: {
-        datasets: data
-      },
-      options: options
-    
-    });
+
+
+  	var chartColors = {
+		  red: 'rgb(255, 99, 132)',
+		  blue: 'rgb(54, 162, 235)'
+		};
+
+		var myChart = new Chart(ctx, {
+		  type: 'pie',
+		  data: {
+		    labels: ["Label 1", "Label 2"],
+		    datasets: [{
+		      backgroundColor: [chartColors.red, chartColors.blue],
+		      data: [4, 7],
+		      hoverBorderWidth: 5,
+		      borderColor: 'transparent',
+		    }]
+		  },
+		  options: {
+		    title: {
+		      display: true,
+		      text: 'Investment in Various Portfolios',
+		    },
+		    legend: {
+		      display: true,
+		      position: 'bottom',
+		      fullWidth: false,
+		      onClick: () => {},
+		      labels: {
+		       
+		      }
+		    },
+		    rotation: 3.9,
+		  },
+		  plugins: [{
+		    beforeInit: function(chart, options) {
+		      console.log('yolo');
+		    }
+		  }]
+		});
 
   }
 
