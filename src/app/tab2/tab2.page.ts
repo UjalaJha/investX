@@ -21,6 +21,9 @@ export class Tab2Page {
 	@ViewChild("pieCanvas",{static:true}) pieCanvas: ElementRef;
 	private pieChart: Chart;
 
+	@ViewChild("pieCanvas2",{static:true}) pieCanvas2: ElementRef;
+	private pieChart2: Chart;
+
 	constructor(private db: DbService,private router: Router){
   }
 
@@ -53,6 +56,7 @@ export class Tab2Page {
           for (var i = 0; i < item.length; i++) {  
           		this.dataName.push(item[i].investment_name);
           		this.dataAmount.push(item[i].investment_amount);
+          		this.dataNum.push(item[i].investment_num);
           		var colour=item[i].investment_name;
           		this.dataColour.push(chartColors[colour]);
 	      	}
@@ -78,7 +82,7 @@ export class Tab2Page {
 		  options: {
 		    title: {
 		      display: true,
-		      text: 'Investment in Various Portfolios',
+		      text: 'Investment By Amount',
 		      fontStyle: 'bold',
       		fontSize: 20
 		    },
@@ -97,7 +101,51 @@ export class Tab2Page {
 		       	label: (tooltipItem, data) => {
 		          const value =
 		          data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-		          return data.labels[tooltipItem.index] + " : " +numberWithCommas(value);
+		          return data.labels[tooltipItem.datasetIndex] + " : " +numberWithCommas(value);
+		        }
+		      }
+		    }
+		  },
+		  plugins: [{
+		    beforeInit: function(chart, options) {
+		     
+		    }
+		  }]
+		});
+
+		let ctx2 = this.pieCanvas2.nativeElement;
+		var myChart2 = new Chart(ctx2, {
+		  type: 'pie',
+		  data: {
+		    labels: this.dataName,
+		    datasets: [{
+		      backgroundColor: this.dataColour,
+		      data: this.dataNum,
+		    }]
+		  },
+		  options: {
+		    title: {
+		      display: true,
+		      text: 'Investment By Number of Transaction',
+		      fontStyle: 'bold',
+      		fontSize: 20
+		    },
+		    legend: {
+		      display: true,
+		      position: 'bottom',
+		      fullWidth: false,
+		      onClick: () => {},
+		      labels: {
+		       
+		      }
+		    },
+		    rotation: 3.9,
+		    tooltips: {
+		      callbacks: {
+		       	label: (tooltipItem, data) => {
+		          const value =
+		          data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+		          return data.labels[tooltipItem.datasetIndex] + " : " +numberWithCommas(value);
 		        }
 		      }
 		    }
