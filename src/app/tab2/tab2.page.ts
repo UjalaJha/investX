@@ -101,7 +101,7 @@ export class Tab2Page {
 		       	label: (tooltipItem, data) => {
 		          const value =
 		          data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-		          return data.labels[tooltipItem.datasetIndex] + " : " +numberWithCommas(value);
+		          return data.labels[tooltipItem.index] + " : " +numberWithCommas(value);
 		        }
 		      }
 		    }
@@ -145,7 +145,7 @@ export class Tab2Page {
 		       	label: (tooltipItem, data) => {
 		          const value =
 		          data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-		          return data.labels[tooltipItem.datasetIndex] + " : " +numberWithCommas(value);
+		          return data.labels[tooltipItem.index] + " : " +numberWithCommas(value);
 		        }
 		      }
 		    }
