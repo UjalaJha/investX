@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder,FormControl, Validators } from "@angular/forms";
 import { DbService } from './../services/db.service';
 import { ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from "@angular/router";
@@ -14,6 +14,9 @@ export class AddInvestmentPage implements OnInit {
 	mainForm: FormGroup;
   data: any;
   investment_full_name:string;
+  validation_messages:any;
+  minDate: string = new Date().toISOString();
+	maxDate : any = "2050-10-31";
 
   constructor(
   	private db: DbService,
@@ -22,8 +25,20 @@ export class AddInvestmentPage implements OnInit {
     private actRoute: ActivatedRoute,
     private router: Router) 
 	  { 
+
 	    this.investment_name = this.actRoute.snapshot.paramMap.get('investment_name');
 	    console.log("Investment Name :"+this.investment_name);
+	    this.validation_messages = {
+			  'investment_title': [
+			    { type: 'required', message: 'Title is required' }
+			  ],
+			  'investment_amount': [
+			    { type: 'required', message: 'Amount is required' }
+			  ],
+			  'investment_interest_rate': [
+			    { type: 'required', message: 'ROI is required' }
+			  ]
+			};
 	  } 
 
   ngOnInit() {
@@ -108,41 +123,50 @@ export class AddInvestmentPage implements OnInit {
 		        this.data=null;
 		        break;
 		}
-  	this.mainForm = this.formBuilder.group({
-      id: [''],
-      investment_name: [''],
-      investment_title: [''],
-      investment_amount: [''],
-	    investment_type: [''],
-	    investment_app: [''],
-	    investment_started_on: [''],
-	    investment_maturing_on: [''],
-	    investment_interest_rate : [''],
-	    investment_more_info : ['']
-    })
+  
+
+    this.mainForm = this.formBuilder.group({
+      investment_title : new FormControl('', Validators.compose([
+          Validators.required
+      ])),        
+      investment_amount : new FormControl('', Validators.compose([
+           Validators.required
+      ])),
+      investment_interest_rate : new FormControl('', Validators.compose([
+           Validators.required
+      ])),
+      investment_app: new FormControl(''),
+      investment_type: new FormControl(''),
+	    investment_started_on: new FormControl(''),
+	    investment_maturing_on: new FormControl(''),
+	    investment_more_info : new FormControl(''),
+    });
   }
 
   // investment_name='PF';
   storeData() {
+    if(this.mainForm.valid){
     	this.db.addInvestment(
-      this.investment_name,
-      this.mainForm.value.investment_title,
-      this.mainForm.value.investment_amount,
+	    this.investment_name,
+	    this.mainForm.value.investment_title,
+	    this.mainForm.value.investment_amount,
 	    this.mainForm.value.investment_type,
 	    this.mainForm.value.investment_app,
 	    this.mainForm.value.investment_started_on,
 	    this.mainForm.value.investment_maturing_on,
 	    this.mainForm.value.investment_interest_rate,
 	    this.mainForm.value.investment_more_info
-    ).then(async(res) => {
-    	console.log("In Store Data",res);
-      this.mainForm.reset();
-      let toast = await this.toast.create({
-        message: 'Investment Added',
-        duration: 2500
-      });
-      toast.present(); 
-    })
+	  	).then(async(res) => {
+		  	console.log("In Store Data",res);
+		    this.mainForm.reset();
+		    let toast = await this.toast.create({
+		      message: 'Investment Added',
+		      duration: 2500
+		    });
+		      toast.present(); 
+	    })
+    }
+  	
   }
 
 }

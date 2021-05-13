@@ -11,11 +11,29 @@
 	<form [formGroup]="mainForm" (ngSubmit)="storeData()">
 		<ion-card>
 			<ion-item>
-				<ion-input placeholder="Enter Title of Investment" formControlName="investment_title" type="text"></ion-input>
+				<ion-input placeholder="Enter Title of Investment" formControlName="investment_title" type="text" required></ion-input>
 			</ion-item>
+			<div *ngFor="let validation of validation_messages.investment_title">
+			  <div class="error-message" *ngIf="mainForm.get('investment_title').hasError(validation.type) && (mainForm.get('investment_title').touched || mainForm.get('investment_title').dirty)">
+			    {{ validation.message }}
+			  </div>
+			</div>
 			<ion-item>
-				<ion-input placeholder="Enter Amount Invested" formControlName="investment_amount" type="number"></ion-input>
+				<ion-input placeholder="Enter Amount Invested" formControlName="investment_amount" type="number" required></ion-input>
 			</ion-item>
+			<div *ngFor="let validation of validation_messages.investment_amount">
+			  <div class="error-message" *ngIf="mainForm.get('investment_amount').hasError(validation.type) && (mainForm.get('investment_amount').touched || mainForm.get('investment_amount').dirty)">
+			    {{ validation.message }}
+			  </div>
+			</div>
+			<ion-item>
+			  <ion-input placeholder="Expected Rate of Interest %" formControlName="investment_interest_rate" required></ion-input>
+			</ion-item>
+			<div *ngFor="let validation of validation_messages.investment_interest_rate">
+			  <div class="error-message" *ngIf="mainForm.get('investment_interest_rate').hasError(validation.type) && (mainForm.get('investment_interest_rate').touched || mainForm.get('investment_interest_rate').dirty)">
+			    {{ validation.message }}
+			  </div>
+			</div>
 			<ion-item *ngIf="data">
 			    <ion-select placeholder="Type" formControlName="investment_type" >
 			      <ion-select-option *ngFor="let entry of data | keyvalue" value="{{entry.key}}">{{entry.value}}</ion-select-option>
@@ -28,17 +46,15 @@
 			  <ion-datetime placeholder="Started On" formControlName="investment_started_on"></ion-datetime>
 			</ion-item>
 			<ion-item>
-			  <ion-datetime placeholder="Maturing On (Optional)" formControlName="investment_maturing_on"></ion-datetime>
+			  <ion-datetime placeholder="Maturing On (Optional)" formControlName="investment_maturing_on" max="2050-10-31"></ion-datetime>
 			</ion-item>
-			<ion-item>
-			  <ion-input placeholder="Expected Rate of Interest %" formControlName="investment_interest_rate"></ion-input>
-			</ion-item>
+			
 			<ion-item>
 				<ion-textarea placeholder="Enter more information here..." formControlName="investment_more_info"></ion-textarea>
 			</ion-item>
 		</ion-card>
 		<section>
-			<ion-button type="submit" expand="block">Add Investment</ion-button>
+			<ion-button type="submit" expand="block" [disabled]="!mainForm.valid">Add Investment</ion-button>
 		</section>
 	</form>
 </ion-content>
