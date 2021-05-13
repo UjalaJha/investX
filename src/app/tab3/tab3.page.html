@@ -7,46 +7,106 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" id="content">
-  <ion-card>
-    <ion-item>
-      <ion-input placeholder="Enter Amount of Investment" id="investment_amount" [(ngModel)]="investment_amount"  type="number"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-select placeholder="Investment Type" id="investment_freq" [(ngModel)]="investment_freq"  >
-        <ion-select-option value="Week">Weekly</ion-select-option>
-        <ion-select-option value="mon">Monthly</ion-select-option>
-        <ion-select-option value="quat">Quarterly</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-input placeholder="Expected Returns" id="investment_roi"  [(ngModel)]="investment_roi"  type="number"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input placeholder="Investment Period (Years)" id="investment_period" [(ngModel)]="investment_period"  type="number"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-select placeholder="Want to Adjust for Inflation?" [(ngModel)]="inflation"  id="inflation" >
-        <ion-select-option value="no">No inflation</ion-select-option>
-        <ion-select-option value="6">6%</ion-select-option>
-        <ion-select-option value="8">8%</ion-select-option>
-        <ion-select-option value="10">10%</ion-select-option>
-        <ion-select-option value="12">12%</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-card>
-  <div class="container" id="pad">
-    <ion-button type="submit" expand="block" (click)="loadResult()">Calculate</ion-button>
+  <div padding>
+    <ion-segment [(ngModel)]="pet">
+      <ion-segment-button value="kittens">
+        SIP 
+      </ion-segment-button>
+      <ion-segment-button value="puppies">
+        Bank Deposit
+      </ion-segment-button>
+    </ion-segment>
   </div>
-  <div id="result1" class="container res-box">
-    <ion-item>
-    <ion-label>Expected Amount:Rs {{expected_amount | number}}</ion-label>
-    </ion-item>
-    <ion-item>
-    <ion-label>Invested Amount:Rs {{amount_invested | number}}</ion-label>
-    </ion-item>
-    <ion-item>
-    <ion-label>Profit Amount:Rs {{profit_earned | number}}</ion-label>
-    </ion-item>
+
+  <div [ngSwitch]="pet">
+    <ion-list *ngSwitchCase="'kittens'">
+      <ion-card>
+        <ion-item>
+          <ion-input placeholder="Enter Amount of Investment" id="investment_amount" [(ngModel)]="investment_amount"  type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-select placeholder="Investment Type" id="investment_freq" [(ngModel)]="investment_freq"  >
+            <ion-select-option value="Week">Weekly</ion-select-option>
+            <ion-select-option value="mon">Monthly</ion-select-option>
+            <ion-select-option value="quat">Quarterly</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="Expected Returns" id="investment_roi"  [(ngModel)]="investment_roi"  type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="Investment Period (Years)" id="investment_period" [(ngModel)]="investment_period"  type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-select placeholder="Want to Adjust for Inflation?" [(ngModel)]="inflation"  id="inflation" >
+            <ion-select-option value="no">No inflation</ion-select-option>
+            <ion-select-option value="6">6%</ion-select-option>
+            <ion-select-option value="8">8%</ion-select-option>
+            <ion-select-option value="10">10%</ion-select-option>
+            <ion-select-option value="12">12%</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-card>
+      <div class="container" id="pad">
+        <ion-button type="submit" expand="block" (click)="loadResult()">Calculate</ion-button>
+      </div>
+      <div id="result1" class="container res-box">
+        <ion-item>
+        <ion-label>Expected Amount:Rs {{expected_amount | number}}</ion-label>
+        </ion-item>
+        <ion-item>
+        <ion-label>Invested Amount:Rs {{amount_invested | number}}</ion-label>
+        </ion-item>
+        <ion-item>
+        <ion-label>Profit Amount:Rs {{profit_earned | number}}</ion-label>
+        </ion-item>
+      </div>
+      
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'puppies'">
+       <ion-card>
+        <ion-item>
+          <ion-select placeholder="Enter Type of Deposit" id="dep_type" [(ngModel)]="dep_type"  >
+            <ion-select-option value="fd">Fixed Deposit</ion-select-option>
+            <ion-select-option value="rd">Recuuring Deposit</ion-select-option>
+            
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="Enter Principal Amount" id="principal_amount" [(ngModel)]="principal_amount"  type="number"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-input placeholder="Interest Rate" id="interest_rate"  [(ngModel)]="interest_rate"  type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="Investment Period (Years)" id="deposit_period" [(ngModel)]="deposit_period"  type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-select placeholder="Compounding Frequency" id="compounding_freq" [(ngModel)]="compounding_freq"  >
+            <ion-select-option value=12>Monthly</ion-select-option>
+            <ion-select-option value=4>Quarterly</ion-select-option>
+            <ion-select-option value=2>Half Yearly</ion-select-option>
+            <ion-select-option value=1>Yearly</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-card>
+      <div class="container" id="pad">
+        <ion-button type="submit" expand="block" (click)="loadBDResult()">Calculate</ion-button>
+      </div>
+      <div id="result1" class="container res-box">
+        <ion-item>
+        <ion-label>Expected Amount:Rs {{expected_amount2 | number}}</ion-label>
+        </ion-item>
+        <ion-item>
+        <ion-label>Principal Amount:Rs {{amount_invested2 | number}}</ion-label>
+        </ion-item>
+        <ion-item>
+        <ion-label>Profit Amount:Rs {{profit_earned2 | number}}</ion-label>
+        </ion-item>
+      </div>
+    </ion-list>
   </div>
   <div class="ion-padding">
     <ion-card>
@@ -55,5 +115,4 @@
       </ion-card-content>
     </ion-card>
   </div>
-  <br>
 </ion-content>
