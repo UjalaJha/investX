@@ -31,18 +31,26 @@ export class Tab3Page {
 	compounding_freq:string="4";
 	dep_type:string="fd";
 
-	@ViewChild("pieCanvas",{static:true}) pieCanvas: ElementRef;
-	private pieChart: Chart;
+	@ViewChild("pieCanvas",{static:false}) pieCanvas: ElementRef;
+	
+	@ViewChild("pieCanvas2",{static:false}) pieCanvas2: ElementRef;
 
 	@ViewChild(IonContent, {static: true}) content: IonContent;
 
+	private pieChart: Chart;
+
 	pet: string = "kittens";
 
-  constructor() {}
+  constructor() {
+  }
 
 	ngOnInit() {
 	  
 	}
+	ngAfterViewInit() {
+		
+  }
+
 
 	scrollToBottomOnInit() {
 	  this.content.scrollToBottom(300);
@@ -82,7 +90,7 @@ export class Tab3Page {
 				
 			}
 			this.scrollToBottomOnInit();
-			this.createGraph(this.amount_invested2,this.profit_earned2,this.expected_amount2);
+			this.createGraph2(this.amount_invested2,this.profit_earned2,this.expected_amount2);
 	}
 
   calculateSIP() {
@@ -153,6 +161,57 @@ export class Tab3Page {
 		};
   	let ctx = this.pieCanvas.nativeElement;
 		var myChart = new Chart(ctx, {
+		  type: 'bar',
+		  data: {
+		    labels:  ['Amount in Rs'],
+		    datasets: [{
+		    	label: 'Invested Amount',
+		      data: [principal],
+          backgroundColor: '#F2AF29',
+		    },
+		    {
+          label: 'Profit Earned',
+          data: [profit],
+          backgroundColor: '#45CB85',
+        }
+        ]
+		  },
+		  options: {
+        scales: {
+          xAxes: [{
+            stacked: true
+          }],
+          yAxes: [{
+            stacked: true
+          }]
+        },
+        tooltips: {
+				  callbacks: {
+						label: function(tooltipItem, data) {
+							let value =
+		          data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+							let op = value.toString();
+							let op2 = op.split(/(?=(?:...)*$)/);
+							let op3 = op2.join(',');
+							return op3;
+						}
+				  } 
+				}
+      },
+		  plugins: [{
+		    beforeInit: function(chart, options) {
+		     
+		    }
+		  }]
+		});
+	}
+	createGraph2(principal,profit,expected){
+		const numberWithCommas = x => {
+		  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		  // return Number(x).toLocaleString();
+		};
+  	let ctx = this.pieCanvas2.nativeElement;
+		var myChart2 = new Chart(ctx, {
 		  type: 'bar',
 		  data: {
 		    labels:  ['Amount in Rs'],

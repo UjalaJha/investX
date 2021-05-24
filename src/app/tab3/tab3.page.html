@@ -63,9 +63,9 @@
       </div>
       
     </ion-list>
-
+    
     <ion-list *ngSwitchCase="'puppies'">
-       <ion-card>
+      <ion-card>
         <ion-item>
           <ion-select placeholder="Enter Type of Deposit" id="dep_type" [(ngModel)]="dep_type"  >
             <ion-select-option value="fd">Fixed Deposit</ion-select-option>
@@ -106,13 +106,24 @@
         <ion-label>Profit Amount:Rs {{profit_earned2 | number}}</ion-label>
         </ion-item>
       </div>
+      
     </ion-list>
+
   </div>
-  <div class="ion-padding">
+  <div [ngSwitch]="pet">
+  <div class="ion-padding" *ngSwitchCase="'kittens'">
     <ion-card>
       <ion-card-content>
         <canvas style="height:300px" height="300" #pieCanvas></canvas>
       </ion-card-content>
     </ion-card>
+  </div>
+  <div class="ion-padding" *ngSwitchCase="'puppies'">
+    <ion-card>
+      <ion-card-content>
+        <canvas style="height:300px" height="300" #pieCanvas2></canvas>
+      </ion-card-content>
+    </ion-card>
+  </div>
   </div>
 </ion-content>
