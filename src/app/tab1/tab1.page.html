@@ -14,7 +14,7 @@
   </ion-header>
 
   <div padding>
-    <ion-segment [(ngModel)]="home"  (ionChange)="onSegmentChange()">
+    <ion-segment [(ngModel)]="home"  (ionChange)="onSegmentChange($event)">
       <ion-segment-button value="portfolio">
         PortFolio 
       </ion-segment-button>

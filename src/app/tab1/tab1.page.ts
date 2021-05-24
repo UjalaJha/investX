@@ -82,101 +82,105 @@ export class Tab1Page {
 		this.router.navigate(['/add-investment/'+investment_name])
 	}
 
-  onSegmentChange() {
-    setTimeout(()=>{
-      console.log("Segment change");
-      const numberWithCommas = x => {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        // return Number(x).toLocaleString();
-      };
-      let ctx = this.pieCanvas.nativeElement;
-      var myChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-          labels: this.dataName,
-          datasets: [{
-            backgroundColor: this.dataColour,
-            data: this.dataAmount,
-          }]
-        },
-        options: {
-          title: {
-            display: true,
-            text: 'Investment By Amount',
-            fontStyle: 'bold',
-            fontSize: 20
+  onSegmentChange(ev: any) {
+    console.log('Segment changed', ev.detail.value);
+    if(ev.detail.value=="insight"){
+      setTimeout(()=>{
+        console.log("Segment change");
+        const numberWithCommas = x => {
+          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          // return Number(x).toLocaleString();
+        };
+        let ctx = this.pieCanvas.nativeElement;
+        var myChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+            labels: this.dataName,
+            datasets: [{
+              backgroundColor: this.dataColour,
+              data: this.dataAmount,
+            }]
           },
-          legend: {
-            display: true,
-            position: 'bottom',
-            fullWidth: false,
-            onClick: () => {},
-            labels: {
-             
-            }
-          },
-          rotation: 3.9,
-          tooltips: {
-            callbacks: {
-               label: (tooltipItem, data) => {
-                const value =
-                data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                return data.labels[tooltipItem.index] + " : " +numberWithCommas(value);
+          options: {
+            title: {
+              display: true,
+              text: 'Investment By Amount',
+              fontStyle: 'bold',
+              fontSize: 20
+            },
+            legend: {
+              display: true,
+              position: 'bottom',
+              fullWidth: false,
+              onClick: () => {},
+              labels: {
+               
+              }
+            },
+            rotation: 3.9,
+            tooltips: {
+              callbacks: {
+                 label: (tooltipItem, data) => {
+                  const value =
+                  data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                  return data.labels[tooltipItem.index] + " : " +numberWithCommas(value);
+                }
               }
             }
-          }
-        },
-        plugins: [{
-          beforeInit: function(chart, options) {
-           
-          }
-        }]
-      });
+          },
+          plugins: [{
+            beforeInit: function(chart, options) {
+             
+            }
+          }]
+        });
 
-      let ctx2 = this.pieCanvas2.nativeElement;
-      var myChart2 = new Chart(ctx2, {
-        type: 'pie',
-        data: {
-          labels: this.dataName,
-          datasets: [{
-            backgroundColor: this.dataColour,
-            data: this.dataNum,
-          }]
-        },
-        options: {
-          title: {
-            display: true,
-            text: 'Investment By Number of Transaction',
-            fontStyle: 'bold',
-            fontSize: 20
+        let ctx2 = this.pieCanvas2.nativeElement;
+        var myChart2 = new Chart(ctx2, {
+          type: 'pie',
+          data: {
+            labels: this.dataName,
+            datasets: [{
+              backgroundColor: this.dataColour,
+              data: this.dataNum,
+            }]
           },
-          legend: {
-            display: true,
-            position: 'bottom',
-            fullWidth: false,
-            onClick: () => {},
-            labels: {
-             
-            }
-          },
-          rotation: 3.9,
-          tooltips: {
-            callbacks: {
-               label: (tooltipItem, data) => {
-                const value =
-                data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                return data.labels[tooltipItem.index] + " : " +numberWithCommas(value);
+          options: {
+            title: {
+              display: true,
+              text: 'Investment By Number of Transaction',
+              fontStyle: 'bold',
+              fontSize: 20
+            },
+            legend: {
+              display: true,
+              position: 'bottom',
+              fullWidth: false,
+              onClick: () => {},
+              labels: {
+               
+              }
+            },
+            rotation: 3.9,
+            tooltips: {
+              callbacks: {
+                 label: (tooltipItem, data) => {
+                  const value =
+                  data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                  return data.labels[tooltipItem.index] + " : " +numberWithCommas(value);
+                }
               }
             }
-          }
-        },
-        plugins: [{
-          beforeInit: function(chart, options) {
-           
-          }
-        }]
-      });
-  },0);
+          },
+          plugins: [{
+            beforeInit: function(chart, options) {
+             
+            }
+          }]
+        });
+      },0);
+
+    }
   }
 
 }
