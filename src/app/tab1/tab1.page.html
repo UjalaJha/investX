@@ -13,173 +13,214 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-card>
-    <ion-item>
-      <ion-label>Provident Fund</ion-label>
-      <ion-button fill="outline" (click)="viewInvestment('pf')">View</ion-button><ion-button fill="outline" (click)="addInvestment('pf')">Add</ion-button>
-    </ion-item>
+  <div padding>
+    <ion-segment [(ngModel)]="home">
+      <ion-segment-button value="portfolio">
+        PortFolio 
+      </ion-segment-button>
+      <ion-segment-button value="insight">
+        Insight
+      </ion-segment-button>
+    </ion-segment>
+  </div>
 
-    <ion-card-content text-wrap>
-      <p>Investment Made till Date :    {{mapAmount.get('pf') | number}}</p>
-      <p>No of Investment Made :  {{mapNum.get('pf') | number}}</p>
-    </ion-card-content>
-  </ion-card>
+  <div [ngSwitch]="home">
+    <ion-list *ngSwitchCase="'portfolio'">
+      <ion-card>
+        <ion-item>
+          <ion-label>Provident Fund</ion-label>
+          <ion-button fill="outline" (click)="viewInvestment('pf')">View</ion-button><ion-button fill="outline" (click)="addInvestment('pf')">Add</ion-button>
+        </ion-item>
 
-  <ion-card>
-    <ion-item>
-      <ion-label>Mutual Fund</ion-label>
-      <ion-button fill="outline" (click)="viewInvestment('mf')">View</ion-button><ion-button fill="outline" (click)="addInvestment('mf')">Add</ion-button>
-    </ion-item>
+        <ion-card-content text-wrap>
+          <p>Investment Made till Date :    {{mapAmount.get('pf') | number}}</p>
+          <p>No of Investment Made :  {{mapNum.get('pf') | number}}</p>
+        </ion-card-content>
+      </ion-card>
 
-    <ion-card-content text-wrap>
-      <p>Investment Made till Date :    {{mapAmount.get('mf') | number}}</p>
-      <p>No of Investment Made :  {{mapNum.get('mf') | number}}</p>
-    </ion-card-content>
-  </ion-card>
+      <ion-card>
+        <ion-item>
+          <ion-label>Mutual Fund</ion-label>
+          <ion-button fill="outline" (click)="viewInvestment('mf')">View</ion-button><ion-button fill="outline" (click)="addInvestment('mf')">Add</ion-button>
+        </ion-item>
 
-  <ion-card>
-    <ion-item>
-      <ion-label>Bank Deposit</ion-label>
-      <ion-button fill="outline" (click)="viewInvestment('bkd')">View</ion-button><ion-button fill="outline" (click)="addInvestment('bkd')">Add</ion-button>
-    </ion-item>
+        <ion-card-content text-wrap>
+          <p>Investment Made till Date :    {{mapAmount.get('mf') | number}}</p>
+          <p>No of Investment Made :  {{mapNum.get('mf') | number}}</p>
+        </ion-card-content>
+      </ion-card>
 
-    <ion-card-content text-wrap>
-      <p>Investment Made till Date :    {{mapAmount.get('bkd') | number}}</p>
-      <p>No of Investment Made :  {{mapNum.get('bkd') | number }}</p>
-    </ion-card-content>
-  </ion-card>
+      <ion-card>
+        <ion-item>
+          <ion-label>Bank Deposit</ion-label>
+          <ion-button fill="outline" (click)="viewInvestment('bkd')">View</ion-button><ion-button fill="outline" (click)="addInvestment('bkd')">Add</ion-button>
+        </ion-item>
 
-  <ion-card>
-    <ion-item>
-      <ion-label>CryptoCurrencies</ion-label>
-      <ion-button fill="outline" (click)="viewInvestment('cc')">View</ion-button><ion-button fill="outline" (click)="addInvestment('cc')">Add</ion-button>
-    </ion-item>
+        <ion-card-content text-wrap>
+          <p>Investment Made till Date :    {{mapAmount.get('bkd') | number}}</p>
+          <p>No of Investment Made :  {{mapNum.get('bkd') | number }}</p>
+        </ion-card-content>
+      </ion-card>
 
-    <ion-card-content text-wrap>
-      <p>Investment Made till Date :    {{mapAmount.get('cc') | number}}</p>
-      <p>No of Investment Made :  {{mapNum.get('cc')| number}}</p>
-    </ion-card-content>
-  </ion-card>
+      <ion-card>
+        <ion-item>
+          <ion-label>CryptoCurrencies</ion-label>
+          <ion-button fill="outline" (click)="viewInvestment('cc')">View</ion-button><ion-button fill="outline" (click)="addInvestment('cc')">Add</ion-button>
+        </ion-item>
 
-  <ion-card>
-    <ion-item>
-      <ion-label>Stocks and Shares</ion-label>
-      <ion-button fill="outline" (click)="viewInvestment('ss')">View</ion-button><ion-button fill="outline" (click)="addInvestment('ss')">Add</ion-button>
-    </ion-item>
+        <ion-card-content text-wrap>
+          <p>Investment Made till Date :    {{mapAmount.get('cc') | number}}</p>
+          <p>No of Investment Made :  {{mapNum.get('cc')| number}}</p>
+        </ion-card-content>
+      </ion-card>
 
-    <ion-card-content text-wrap>
-      <p>Investment Made till Date :    {{mapAmount.get('ss') | number}}</p>
-      <p>No of Investment Made :  {{mapNum.get('ss') | number}}</p>
-    </ion-card-content>
-  </ion-card>
+      <ion-card>
+        <ion-item>
+          <ion-label>Stocks and Shares</ion-label>
+          <ion-button fill="outline" (click)="viewInvestment('ss')">View</ion-button><ion-button fill="outline" (click)="addInvestment('ss')">Add</ion-button>
+        </ion-item>
 
-  <ion-card>
-    <ion-item>
-      <ion-label>Bonds</ion-label>
-      <ion-button fill="outline" (click)="viewInvestment('bd')">View</ion-button><ion-button fill="outline" (click)="addInvestment('bd')">Add</ion-button>
-    </ion-item>
+        <ion-card-content text-wrap>
+          <p>Investment Made till Date :    {{mapAmount.get('ss') | number}}</p>
+          <p>No of Investment Made :  {{mapNum.get('ss') | number}}</p>
+        </ion-card-content>
+      </ion-card>
 
-    <ion-card-content text-wrap>
-      <p>Investment Made till Date :    {{mapAmount.get('bd') | number}}</p>
-      <p>No of Investment Made :  {{mapNum.get('bd')| number}}</p>
-    </ion-card-content>
-  </ion-card>
+      <ion-card>
+        <ion-item>
+          <ion-label>Bonds</ion-label>
+          <ion-button fill="outline" (click)="viewInvestment('bd')">View</ion-button><ion-button fill="outline" (click)="addInvestment('bd')">Add</ion-button>
+        </ion-item>
 
-  <ion-card>
-    <ion-item>
-      <ion-label>Commodity</ion-label>
-      <ion-button fill="outline" (click)="viewInvestment('cd')">View</ion-button><ion-button fill="outline" (click)="addInvestment('cd')">Add</ion-button>
-    </ion-item>
+        <ion-card-content text-wrap>
+          <p>Investment Made till Date :    {{mapAmount.get('bd') | number}}</p>
+          <p>No of Investment Made :  {{mapNum.get('bd')| number}}</p>
+        </ion-card-content>
+      </ion-card>
 
-    <ion-card-content text-wrap>
-      <p>Investment Made till Date :    {{mapAmount.get('cd')| number}}</p>
-      <p>No of Investment Made :  {{mapNum.get('cd')| number}}</p>
-    </ion-card-content>
-  </ion-card>
+      <ion-card>
+        <ion-item>
+          <ion-label>Commodity</ion-label>
+          <ion-button fill="outline" (click)="viewInvestment('cd')">View</ion-button><ion-button fill="outline" (click)="addInvestment('cd')">Add</ion-button>
+        </ion-item>
 
-  <ion-card>
-    <ion-item>
-      <ion-label>LIC</ion-label>
-      <ion-button fill="outline" (click)="viewInvestment('lic')">View</ion-button><ion-button fill="outline" (click)="addInvestment('lic')">Add</ion-button>
-    </ion-item>
+        <ion-card-content text-wrap>
+          <p>Investment Made till Date :    {{mapAmount.get('cd')| number}}</p>
+          <p>No of Investment Made :  {{mapNum.get('cd')| number}}</p>
+        </ion-card-content>
+      </ion-card>
 
-    <ion-card-content text-wrap>
-      <p>Investment Made till Date :    {{mapAmount.get('lic')| number}}</p>
-      <p>No of Investment Made :  {{mapNum.get('lic')| number}}</p>
-    </ion-card-content>
-  </ion-card>
+      <ion-card>
+        <ion-item>
+          <ion-label>LIC</ion-label>
+          <ion-button fill="outline" (click)="viewInvestment('lic')">View</ion-button><ion-button fill="outline" (click)="addInvestment('lic')">Add</ion-button>
+        </ion-item>
 
-  <ion-card>
-    <ion-item>
-      <ion-label>Insurance</ion-label>
-      <ion-button fill="outline" (click)="viewInvestment('ins')">View</ion-button><ion-button fill="outline" (click)="addInvestment('ins')">Add</ion-button>
-    </ion-item>
+        <ion-card-content text-wrap>
+          <p>Investment Made till Date :    {{mapAmount.get('lic')| number}}</p>
+          <p>No of Investment Made :  {{mapNum.get('lic')| number}}</p>
+        </ion-card-content>
+      </ion-card>
 
-    <ion-card-content text-wrap>
-      <p>Investment Made till Date :    {{mapAmount.get('ins')| number}}</p>
-      <p>No of Investment Made :  {{mapNum.get('ins')| number}}</p>
-    </ion-card-content>
-  </ion-card>
+      <ion-card>
+        <ion-item>
+          <ion-label>Insurance</ion-label>
+          <ion-button fill="outline" (click)="viewInvestment('ins')">View</ion-button><ion-button fill="outline" (click)="addInvestment('ins')">Add</ion-button>
+        </ion-item>
 
-  <ion-card>
-    <ion-item>
-      <ion-label>ETF</ion-label>
-      <ion-button fill="outline" (click)="viewInvestment('etf')">View</ion-button><ion-button fill="outline" (click)="addInvestment('etf')">Add</ion-button>
-    </ion-item>
+        <ion-card-content text-wrap>
+          <p>Investment Made till Date :    {{mapAmount.get('ins')| number}}</p>
+          <p>No of Investment Made :  {{mapNum.get('ins')| number}}</p>
+        </ion-card-content>
+      </ion-card>
 
-    <ion-card-content text-wrap>
-      <p>Investment Made till Date :    {{mapAmount.get('etf')| number}}</p>
-      <p>No of Investment Made :  {{mapNum.get('etf')| number}}</p>
-    </ion-card-content>
-  </ion-card>
+      <ion-card>
+        <ion-item>
+          <ion-label>ETF</ion-label>
+          <ion-button fill="outline" (click)="viewInvestment('etf')">View</ion-button><ion-button fill="outline" (click)="addInvestment('etf')">Add</ion-button>
+        </ion-item>
 
-  <ion-card>
-    <ion-item>
-      <ion-label>Retirement Funds</ion-label>
-      <ion-button fill="outline" (click)="viewInvestment('ret')">View</ion-button><ion-button fill="outline" (click)="addInvestment('ret')">Add</ion-button>
-    </ion-item>
+        <ion-card-content text-wrap>
+          <p>Investment Made till Date :    {{mapAmount.get('etf')| number}}</p>
+          <p>No of Investment Made :  {{mapNum.get('etf')| number}}</p>
+        </ion-card-content>
+      </ion-card>
 
-    <ion-card-content text-wrap>
-      <p>Investment Made till Date :    {{mapAmount.get('ret')| number}}</p>
-      <p>No of Investment Made :  {{mapNum.get('ret')| number}}</p>
-    </ion-card-content>
-  </ion-card>
+      <ion-card>
+        <ion-item>
+          <ion-label>Retirement Funds</ion-label>
+          <ion-button fill="outline" (click)="viewInvestment('ret')">View</ion-button><ion-button fill="outline" (click)="addInvestment('ret')">Add</ion-button>
+        </ion-item>
 
-  <ion-card>
-    <ion-item>
-      <ion-label>Childs Future</ion-label>
-      <ion-button fill="outline" (click)="viewInvestment('chf')">View</ion-button><ion-button fill="outline" (click)="addInvestment('chf')">Add</ion-button>
-    </ion-item>
+        <ion-card-content text-wrap>
+          <p>Investment Made till Date :    {{mapAmount.get('ret')| number}}</p>
+          <p>No of Investment Made :  {{mapNum.get('ret')| number}}</p>
+        </ion-card-content>
+      </ion-card>
 
-    <ion-card-content text-wrap>
-      <p>Investment Made till Date :    {{mapAmount.get('chf')| number}}</p>
-      <p>No of Investment Made :  {{mapNum.get('chf')| number}}</p>
-    </ion-card-content>
-  </ion-card>
+      <ion-card>
+        <ion-item>
+          <ion-label>Childs Future</ion-label>
+          <ion-button fill="outline" (click)="viewInvestment('chf')">View</ion-button><ion-button fill="outline" (click)="addInvestment('chf')">Add</ion-button>
+        </ion-item>
 
-  <ion-card>
-    <ion-item>
-      <ion-label>Government Schemes</ion-label>
-      <ion-button fill="outline" (click)="viewInvestment('gvt')">View</ion-button><ion-button fill="outline" (click)="addInvestment('gvt')">Add</ion-button>
-    </ion-item>
+        <ion-card-content text-wrap>
+          <p>Investment Made till Date :    {{mapAmount.get('chf')| number}}</p>
+          <p>No of Investment Made :  {{mapNum.get('chf')| number}}</p>
+        </ion-card-content>
+      </ion-card>
 
-    <ion-card-content text-wrap>
-      <p>Investment Made till Date :    {{mapAmount.get('gvt')| number}}</p>
-      <p>No of Investment Made :  {{mapNum.get('gvt')| number}}</p>
-    </ion-card-content>
-  </ion-card>
+      <ion-card>
+        <ion-item>
+          <ion-label>Government Schemes</ion-label>
+          <ion-button fill="outline" (click)="viewInvestment('gvt')">View</ion-button><ion-button fill="outline" (click)="addInvestment('gvt')">Add</ion-button>
+        </ion-item>
 
-  <ion-card>
-    <ion-item>
-      <ion-label>Others</ion-label>
-      <ion-button fill="outline" (click)="viewInvestment('oth')">View</ion-button><ion-button fill="outline" (click)="addInvestment('oth')">Add</ion-button>
-    </ion-item>
+        <ion-card-content text-wrap>
+          <p>Investment Made till Date :    {{mapAmount.get('gvt')| number}}</p>
+          <p>No of Investment Made :  {{mapNum.get('gvt')| number}}</p>
+        </ion-card-content>
+      </ion-card>
 
-    <ion-card-content text-wrap>
-      <p>Investment Made till Date :    {{mapAmount.get('oth')| number}}</p>
-      <p>No of Investment Made :  {{mapNum.get('oth')| number}}</p>
-    </ion-card-content>
-  </ion-card>
+      <ion-card>
+        <ion-item>
+          <ion-label>Others</ion-label>
+          <ion-button fill="outline" (click)="viewInvestment('oth')">View</ion-button><ion-button fill="outline" (click)="addInvestment('oth')">Add</ion-button>
+        </ion-item>
 
+        <ion-card-content text-wrap>
+          <p>Investment Made till Date :    {{mapAmount.get('oth')| number}}</p>
+          <p>No of Investment Made :  {{mapNum.get('oth')| number}}</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+
+
+    <!-- <ion-list *ngSwitchCase="'insight'">
+      <div class="ion-padding">
+        <ion-card>
+          <ion-card-header>
+            
+          </ion-card-header>
+          <ion-card-content>
+            <canvas style="height: 400px" height="400" #pieCanvas></canvas>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div class="ion-padding">
+        <ion-card>
+          <ion-card-header>
+            
+          </ion-card-header>
+          <ion-card-content>
+            <canvas style="height: 400px" height="400" #pieCanvas2></canvas>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-list> -->
+
+    
+  </div>
+  
 
 </ion-content>
