@@ -53,9 +53,10 @@ export class AddInvestmentPage implements OnInit {
 		   			console.log("Data of Type : ",this.data);
 		        break;
 		    case 'mf':
+		    		map.set("equity","Equity");
+		    		map.set("elss","Elss");
 						map.set("liquid","Liquid");
 						map.set("debt","Debt");
-						map.set("equity","Equity");
 						map.set("hybrid","Hybrid");
 						map.set("solutionoriented","SolutionOriented");
 						this.data=map;
@@ -104,11 +105,15 @@ export class AddInvestmentPage implements OnInit {
 	        	this.investment_full_name="ETF";
 		        break;
 	      case 'ret':
+	      		map.set("nps","NationalPensionScheme");
+						this.data=map;
 	      		this.investment_full_name="Retirement Fund"
 	        	this.data=null;
 		        break;
 	      case 'chf':
-	      		this.investment_full_name="Child Futures"
+	      		map.set("ssy","SukanyaSamridhiYojayana");
+						this.data=map;
+						this.investment_full_name="Child Futures"
 	        	this.data=null;
 		        break;
 	      case 'gvt':

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { DbService } from './../services/db.service';
 
 @Component({
   selector: 'app-tab2',
@@ -6,13 +7,25 @@ import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-	
-	constructor(){
+	mapTax=new Map();
+	defaultYear:any;
+	constructor(private db: DbService){
+		this.defaultYear="22";
   }
 
-  ngOnInit(){
-  	
+  ionViewDidEnter(){
+  	this.onChange(this.defaultYear)
   }
 
+  onChange(year){
+		console.log(year)
+		this.mapTax=new Map();
+		this.db.getTaxPF(year).then(res=> {
+    		this.mapTax.set(res[0].investment_name,res[0].investment_amount);
+    });
+    this.db.getTaxElss(year).then(res=> {
+    		this.mapTax.set(res[0].investment_name,res[0].investment_amount);
+    });
+	}
 
 }
