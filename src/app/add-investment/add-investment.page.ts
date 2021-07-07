@@ -44,7 +44,7 @@ export class AddInvestmentPage implements OnInit {
   ngOnInit() {
   	let map = new Map();
 		switch (this.investment_name) {
-		    case 'pf':
+		    case 'ProvidentFund':
 		   			map.set("ppf","PPF");
 						map.set("epf","EPF");
 						map.set("vpf","VPF");
@@ -52,7 +52,7 @@ export class AddInvestmentPage implements OnInit {
 						this.investment_full_name="Provident Fund";
 		   			console.log("Data of Type : ",this.data);
 		        break;
-		    case 'mf':
+		    case 'MutualFund':
 		    		map.set("equity","Equity");
 		    		map.set("elss","Elss");
 						map.set("liquid","Liquid");
@@ -63,13 +63,13 @@ export class AddInvestmentPage implements OnInit {
 						this.investment_full_name="Mutual Fund";
 		   			console.log("Data of Type : ",this.data);
 		        break;
-		    case 'bkd':
+		    case 'BankDeposit':
 		        map.set("fixeddeposit","FixedDeposit");
 						map.set("recurringdeposit","RecurringDeposit");
 						this.investment_full_name="Bank Deposit";
 						this.data=map;
 		        break;
-		    case 'cc':
+		    case 'Crypto':
 		        map.set("bitcoin","Bitcoin");
 						map.set("ether","Ether");
 						map.set("dogecoin","Dogecoin");
@@ -77,50 +77,49 @@ export class AddInvestmentPage implements OnInit {
 						this.data=map;
 						this.investment_full_name="CryptoCurrency";
 		        break;
-		    case 'ss':
+		    case 'SharesAndStocks':
 		    		map.set("usstock","USStock");
 		    		map.set("indiastock","IndiaStock");
 		    		this.data=map;
 		    		this.investment_full_name="Stocks and Shares";
 		        console.log("It is a Thursday.");
 		        break;
-		    case 'cd':
+		    case 'Commodity':
 		        this.data=null;
 		        this.investment_full_name="Commodity"
 		        break;
-		    case 'bd':
+		    case 'Bonds':
 		        this.data=null;
 		        this.investment_full_name="Bonds"
 		        break;
-	     	case 'lic':
+	     	case 'LIC':
 		        this.data=null;
 		        this.investment_full_name="LIC"
 		        break;
-	      case 'ins':
-		        this.data=null;
+	      case 'InsurancePlans':
+	      		map.set("8CtaxSavingInsurance","80CTaxSavingInsurance");
+		        this.data=map;
 		        this.investment_full_name="Insurance";
 		        break;
-	      case 'etf':
+	      case 'ETF':
 	        	this.data=null;
 	        	this.investment_full_name="ETF";
 		        break;
-	      case 'ret':
+	      case 'RetirementFund':
 	      		map.set("nps","NationalPensionScheme");
 						this.data=map;
 	      		this.investment_full_name="Retirement Fund"
-	        	this.data=null;
 		        break;
-	      case 'chf':
+	      case 'ChildFutures':
 	      		map.set("ssy","SukanyaSamridhiYojayana");
 						this.data=map;
 						this.investment_full_name="Child Futures"
-	        	this.data=null;
 		        break;
-	      case 'gvt':
+	      case 'GovernmentFund':
 	      		this.investment_full_name="Government Funds"
 	        	this.data=null;
 		        break;
-	      case 'oth':
+	      case 'Others':
 	      		this.investment_full_name="Other";
 	        	this.data=null;
 		        break;	

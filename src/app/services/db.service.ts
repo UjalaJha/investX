@@ -153,8 +153,49 @@ export class DbService {
       return items;
     }).catch(e => console.log(e));
   }
+  getTaxSSY(year){
+    var sqlQuery: string = `SELECT count(*) as num,sum(investment_amount) as sum,investment_type
+    FROM investment  WHERE investment_started_on >= '20`+[year-1]+`-04-01'
+    AND investment_started_on <= '20`+year+`-03-31' AND investment_type='ssy';`;
+    console.log("SQL Query : ",sqlQuery)
+    return this.storage.executeSql(sqlQuery, []).then(res => {
+      console.log("In Get Tax Details : ",res);
+      let items: InvestmentOverview[] = [];
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) { 
+          items.push({ 
+            investment_name: res.rows.item(i).investment_type,  
+            investment_amount: res.rows.item(i).sum,
+            investment_num: res.rows.item(i).num
+         });
+        }
 
+      }
+      return items;
+    }).catch(e => console.log(e));
+  }
 
+  getTaxInsurance(year){
+    var sqlQuery: string = `SELECT count(*) as num,sum(investment_amount) as sum,investment_type
+    FROM investment  WHERE investment_started_on >= '20`+[year-1]+`-04-01'
+    AND investment_started_on <= '20`+year+`-03-31' AND investment_name='lic';`;
+    console.log("SQL Query : ",sqlQuery)
+    return this.storage.executeSql(sqlQuery, []).then(res => {
+      console.log("In Get Tax Details : ",res);
+      let items: InvestmentOverview[] = [];
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) { 
+          items.push({ 
+            investment_name: res.rows.item(i).investment_type,  
+            investment_amount: res.rows.item(i).sum,
+            investment_num: res.rows.item(i).num
+         });
+        }
+
+      }
+      return items;
+    }).catch(e => console.log(e));
+  }
 
   // Add
   addInvestment(investment_name, investment_title,investment_amount,investment_type,investment_app,

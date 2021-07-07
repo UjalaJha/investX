@@ -26,6 +26,12 @@ export class Tab2Page {
     this.db.getTaxElss(year).then(res=> {
     		this.mapTax.set(res[0].investment_name,res[0].investment_amount);
     });
+    this.db.getTaxSSY(year).then(res=> {
+    		this.mapTax.set(res[0].investment_name,res[0].investment_amount);
+    });
+    this.db.getTaxInsurance(year).then(res=> {
+    		this.mapTax.set('ip',res[0].investment_amount);
+    });
 	}
 
 }
