@@ -106,6 +106,7 @@ export class Tab1Page {
               display: true,
               text: 'Investment By Amount',
               fontStyle: 'bold',
+              fontFamily : "Montserrat",
               fontSize: 20
             },
             legend: {
@@ -149,6 +150,7 @@ export class Tab1Page {
             title: {
               display: true,
               text: 'Investment By Number of Transaction',
+              fontFamily : "Montserrat",
               fontStyle: 'bold',
               fontSize: 20
             },
