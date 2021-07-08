@@ -14,26 +14,28 @@
 	    
 	    <ion-card-title color="primary">&nbsp;&nbsp;80 C Investments</ion-card-title>
 	    <ion-card-subtitle>&nbsp;&nbsp;&nbsp;1,50,000 Limit</ion-card-subtitle>
-	     <ion-item> 
-	     	<ion-card-subtitle>Fiscal Year : &nbsp;</ion-card-subtitle>
-		    <ion-select #year (ionChange)="onChange(year.value)" [(ngModel)]="defaultYear">
-		      <ion-select-option value="20">2019-20</ion-select-option>
-		      <ion-select-option value="21">2020-21</ion-select-option>
-		      <ion-select-option value="22">2021-22</ion-select-option>
-		    </ion-select>
-		  </ion-item>
+	     	<ion-item> 
+		     	<ion-card-subtitle>Fiscal Year : &nbsp;</ion-card-subtitle>
+		     	<img slot="end" class="ion-padding-bottom" src="https://img.icons8.com/fluent/48/000000/money-box.png"/>
+			    <ion-select #year (ionChange)="onChange(year.value)" [(ngModel)]="defaultYear">
+			      <ion-select-option value="20">2019-20</ion-select-option>
+			      <ion-select-option value="21">2020-21</ion-select-option>
+			      <ion-select-option value="22">2021-22</ion-select-option>
+			    </ion-select>
+			    
+		  	</ion-item>
 	  </ion-card-header>
 
 	  <ion-card-content>
 	    <ion-list>
 		  <ion-item>
-		    <ion-icon name="arrow-forward-circle-outline"></ion-icon>&nbsp;<ion-label>Provident Fund</ion-label><ion-button fill="outline" warning>₹ {{mapTax.get('pf') | number}}</ion-button>
+		    <ion-icon name="arrow-forward-circle-outline"></ion-icon>&nbsp;<ion-label>Provident Fund</ion-label><ion-button fill="outline" warning>₹ {{mapTax.get('ProvidentFund') | number}}</ion-button>
 		  </ion-item>
 		  <ion-item>
 		    <ion-icon name="arrow-forward-circle-outline"></ion-icon>&nbsp;<ion-label>Equity Linked <br> Saving Schemes</ion-label><ion-button fill="outline" warning>₹ {{mapTax.get('elss') | number}}</ion-button>
 		  </ion-item>
 		  <ion-item>
-		    <ion-icon name="arrow-forward-circle-outline"></ion-icon>&nbsp;<ion-label>Tax Saving FD</ion-label><ion-button fill="outline" warning>₹ {{mapTax.get('tsfd') | number}}</ion-button>
+		    <ion-icon name="arrow-forward-circle-outline"></ion-icon>&nbsp;<ion-label>Tax Saving FD</ion-label><ion-button fill="outline" warning>₹ {{mapTax.get('taxsavingfd') | number}}</ion-button>
 		  </ion-item>
 		  <ion-item>
 		    <ion-icon name="arrow-forward-circle-outline"></ion-icon>&nbsp;<ion-label>Insurance Plan</ion-label><ion-button fill="outline" warning>₹ {{mapTax.get('ip') | number}}</ion-button>

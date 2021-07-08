@@ -64,8 +64,9 @@ export class AddInvestmentPage implements OnInit {
 		   			console.log("Data of Type : ",this.data);
 		        break;
 		    case 'BankDeposit':
-		        map.set("fixeddeposit","FixedDeposit");
-						map.set("recurringdeposit","RecurringDeposit");
+		      	map.set("fixeddeposit","Regular FD");
+						map.set("recurringdeposit","Recurring Deposit");
+						map.set("taxsavingfd","Tax Saving FD");
 						this.investment_full_name="Bank Deposit";
 						this.data=map;
 		        break;
