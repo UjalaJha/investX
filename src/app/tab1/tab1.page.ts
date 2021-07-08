@@ -32,26 +32,42 @@ export class Tab1Page {
   }
 
   ngOnInit(){
+
   	this.db.dbState().subscribe((res) => {
       console.log("In Tab1Page dbState : ",res);
 	    if(res){
+
+        this.db.addInvestment("ProvidentFund","PPF for April 2021",2500,"ppf","","2021-04-01","",7,"");
+        this.db.addInvestment("ProvidentFund","PPF for May 2021",2500,"ppf","","2021-05-01","",7,"");
+        this.db.addInvestment("ProvidentFund","PPF for June 2021",2500,"ppf","","2021-06-01","",7,"");
+        this.db.addInvestment("ProvidentFund","PPF for July 2021",2500,"ppf","","2021-07-01","",7,"");
+        this.db.addInvestment("MutualFund","ELSS for April 2021",10000,"elss","","2021-04-01","",7,"");
+        this.db.addInvestment("MutualFund","ELSS for June 2021",10000,"elss","","2021-06-01","",7,"");
+        this.db.addInvestment("MutualFund","ELSS for July 2021",10000,"elss","","2021-07-01","",7,"");
+        this.db.addInvestment("MutualFund","Equity for April 2021",10000,"equity","","2021-04-01","",7,"");
+        this.db.addInvestment("MutualFund","Equity for June 2021",10000,"equity","","2021-06-01","",7,"");
+        this.db.addInvestment("MutualFund","Equity for July 2021",10000,"equity","","2021-07-01","",7,"");
+        this.db.addInvestment("BankDeposit","FD 1.0",600000,"fixeddeposit","","2021-03-15","",5,"");
+        this.db.addInvestment("BankDeposit","FD 2.0",56966,"taxsavingfd","","2021-04-01","",5,"");
+        this.db.addInvestment("BankDeposit","FD 3.0",100000,"fixeddeposit","","2021-04-30","",5,"");
+
 	      this.db.fetchInvestmentsDetails().subscribe(item => {
           console.log("In getInvestmentsDetails : ",item);
           var chartColors = {
-            pf: 'rgb(255, 168, 96)',
-            mf: 'rgb(168, 216, 168)',
-            bkd: 'rgb(96, 192, 168)',
-            cc: 'rgb(48, 144, 192)',
-            ss: 'rgb(240, 240, 168)',
-            cd: 'rgb(240, 120, 72)',
-            bd: 'rgb(192, 216, 144)',
-            lic: 'rgb(144, 192, 216)',
-            ins: 'rgb(240, 168, 144)',
-            etf: 'rgb(240, 216, 168)',
-            ret: 'rgb(192, 168, 192)',
-            chf: 'rgb(0, 72, 96)',
-            gvt: 'rgb(72, 168, 168)',
-            oth: 'rgb(216, 216, 192)',
+            ProvidentFund: 'rgb(255, 168, 96)',
+            MutualFund: 'rgb(168, 216, 168)',
+            BankDeposit: 'rgb(96, 192, 168)',
+            Crypto: 'rgb(48, 144, 192)',
+            SharesAndStocks: 'rgb(240, 240, 168)',
+            Commodity: 'rgb(240, 120, 72)',
+            Bonds: 'rgb(192, 216, 144)',
+            LIC: 'rgb(144, 192, 216)',
+            InsurancePlans: 'rgb(240, 168, 144)',
+            ETF: 'rgb(240, 216, 168)',
+            RetirementFund: 'rgb(192, 168, 192)',
+            ChildFutures: 'rgb(0, 72, 96)',
+            GovernmentFund: 'rgb(72, 168, 168)',
+            Others: 'rgb(216, 216, 192)',
           };
           this.mapNum.clear();
           this.mapAmount.clear();
@@ -136,50 +152,7 @@ export class Tab1Page {
           }]
         });
 
-        let ctx2 = this.pieCanvas2.nativeElement;
-        var myChart2 = new Chart(ctx2, {
-          type: 'pie',
-          data: {
-            labels: this.dataName,
-            datasets: [{
-              backgroundColor: this.dataColour,
-              data: this.dataNum,
-            }]
-          },
-          options: {
-            title: {
-              display: true,
-              text: 'Investment By Number of Transaction',
-              fontFamily : "Montserrat",
-              fontStyle: 'bold',
-              fontSize: 20
-            },
-            legend: {
-              display: true,
-              position: 'bottom',
-              fullWidth: false,
-              onClick: () => {},
-              labels: {
-               
-              }
-            },
-            rotation: 3.9,
-            tooltips: {
-              callbacks: {
-                 label: (tooltipItem, data) => {
-                  const value =
-                  data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                  return data.labels[tooltipItem.index] + " : " +numberWithCommas(value);
-                }
-              }
-            }
-          },
-          plugins: [{
-            beforeInit: function(chart, options) {
-             
-            }
-          }]
-        });
+
       },0);
 
     }
