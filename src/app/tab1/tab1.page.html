@@ -38,7 +38,7 @@
                 <div>Total Invested</div>
               </ion-col>
               <ion-col>
-                <div align="right">Absolute Returns&nbsp;<ion-icon name="create-sharp"></ion-icon></div>
+                <div align="right">Absolute Returns&nbsp;<span (click)="openModal()"><ion-icon name="create-sharp"></ion-icon></span></div>
               </ion-col>
             </ion-row>
             <ion-row>
@@ -46,7 +46,7 @@
                 <h1 color="success">₹ {{mapAmount.get('ProvidentFund') | number}}</h1>
               </ion-col>
               <ion-col>
-                <h1 align="right">6.1 % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
+                <h1 align="right">{{mapAbsReturn.get('ProvidentFund')}}  % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -74,7 +74,7 @@
                 <h1 color="success">₹ {{mapAmount.get('MutualFund') | number}}</h1>
               </ion-col>
               <ion-col>
-                <h1 align="right">- 1.3 % <ion-icon name="trending-down-outline" color="danger"></ion-icon></h1>
+                <h1 align="right">{{mapAbsReturn.get('MutualFund')}} % <ion-icon name="trending-down-outline" color="danger"></ion-icon></h1>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -102,7 +102,7 @@
                 <h1 color="success">₹  {{mapAmount.get('BankDeposit') | number}}</h1>
               </ion-col>
               <ion-col>
-                <h1 align="right">5.4 % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
+                <h1 align="right">{{mapAbsReturn.get('BankDeposit')}} % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
               </ion-col>
             </ion-row>
           </ion-grid>

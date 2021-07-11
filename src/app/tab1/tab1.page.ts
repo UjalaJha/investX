@@ -4,6 +4,8 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { DbService } from './../services/db.service';
 import { InvestmentOverview } from '../services/investment-overview';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { ReturnsModalPage } from '../modals/returns-modal/returns-modal.page';
 
 @Component({
   selector: 'app-tab1',
@@ -14,8 +16,9 @@ export class Tab1Page {
 	data: InvestmentOverview[]=[];
 	mapAmount = new Map();
   mapNum = new Map();
+  mapAbsReturn = new Map();
   home: string = "portfolio";
-
+  dataReturned: any;
   dataAmount = [];
   dataNum = [];
   dataName=[];
@@ -28,7 +31,7 @@ export class Tab1Page {
 
   private pieChart: Chart;
 
-  constructor(private db: DbService,private router: Router){
+  constructor(private db: DbService,private router: Router,public modalController: ModalController){
   }
 
   ngOnInit(){
@@ -36,7 +39,9 @@ export class Tab1Page {
   	this.db.dbState().subscribe((res) => {
       console.log("In Tab1Page dbState : ",res);
 	    if(res){
-
+        this.db.addAbsReturns("ProvidentFund",6.1);
+        this.db.addAbsReturns("MutualFund",6.2);
+        this.db.addAbsReturns("BankDeposit",6.3);
         this.db.addInvestment("ProvidentFund","PPF for April 2021",2500,"ppf","","2021-04-01","",7,"");
         this.db.addInvestment("ProvidentFund","PPF for May 2021",2500,"ppf","","2021-05-01","",7,"");
         this.db.addInvestment("ProvidentFund","PPF for June 2021",2500,"ppf","","2021-06-01","",7,"");
@@ -79,6 +84,7 @@ export class Tab1Page {
           		console.log("Item Single:",item[i].investment_name);
           		this.mapAmount.set(item[i].investment_name,item[i].investment_amount);
 							this.mapNum.set(item[i].investment_name,item[i].investment_num);
+              this.mapAbsReturn.set(item[i].investment_name,item[i].investment_abs_return);
               this.dataName.push(item[i].investment_name);
               this.dataAmount.push(item[i].investment_amount);
               this.dataNum.push(item[i].investment_num);
@@ -90,6 +96,12 @@ export class Tab1Page {
 	    }
 	  });
   }
+  clickEdit(){
+    this.router.navigate(['/change-return'])
+  }
+  setEditable(item) {
+    item.editable = true;
+  }
   viewInvestment(investment_name){
 		this.router.navigate(['/view-investment/'+investment_name])
 	}
@@ -97,6 +109,24 @@ export class Tab1Page {
 	addInvestment(investment_name){
 		this.router.navigate(['/add-investment/'+investment_name])
 	}
+
+  async openModal() {
+    const modal = await this.modalController.create({
+      component: ReturnsModalPage,
+      componentProps: {
+        "mapAbsReturn": this.mapAbsReturn
+      }
+    });
+
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        this.dataReturned = dataReturned.data;
+        //alert('Modal Sent Data :'+ dataReturned);
+      }
+    });
+
+    return await modal.present();
+  }
 
   onSegmentChange(ev: any) {
     console.log('Segment changed', ev.detail.value);

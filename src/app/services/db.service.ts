@@ -38,14 +38,23 @@ export class DbService {
 				    investment_maturing_on DATE,
 				    investment_interest_rate TEXT,
 				    investment_more_info TEXT
-						);`
+						);
+            `
 		      , [])
-		      .then(() => console.log('Executed SQL'))
-		      .catch(e => console.log(e));
-		      this.isDbReady.next(true);
-		      this.getinvestments();
-	      })
-	    });
+		      .then(() => {
+            db.executeSql(`CREATE TABLE IF NOT EXISTS investment_abs_return(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            investment_name TEXT, 
+            investment_absolute_return TEXT
+            );`
+            ,[])
+            .then(()=>{
+              this.isDbReady.next(true);
+              this.getinvestments();
+            }).catch(e => console.log(e));
+          }).catch(e => console.log(e));
+	      }).catch(e => console.log(e));
+	    }).catch(e => console.log(e));
   	}
 
   dbState() {
@@ -93,8 +102,8 @@ export class DbService {
     }).catch(e => console.log(e));
   }
   getInvestmentsDetails(){
-  	var sqlQuery: string = `SELECT SUM(investment_amount) as sum, COUNT(*) as num, investment_name
-  	FROM investment GROUP BY investment_name`;
+  	var sqlQuery: string = `SELECT SUM(investment_amount) as sum, COUNT(*) as num, i.investment_name, iar.investment_absolute_return
+  	FROM investment as i left join investment_abs_return as iar  where i.investment_name = iar.investment_name GROUP BY i.investment_name`;
   	console.log("SQL Query : ",sqlQuery)
     return this.storage.executeSql(sqlQuery, []).then(res => {
     	console.log("In Get Investments Details : ",res);
@@ -104,7 +113,8 @@ export class DbService {
           items.push({ 
             investment_name: res.rows.item(i).investment_name,  
             investment_amount: res.rows.item(i).sum,
-				    investment_num: res.rows.item(i).num
+				    investment_num: res.rows.item(i).num,
+            investment_abs_return : res.rows.item(i).investment_absolute_return
 				 });
         }
       }
@@ -124,7 +134,8 @@ export class DbService {
           items.push({ 
             investment_name: res.rows.item(i).investment_name,  
             investment_amount: res.rows.item(i).sum,
-            investment_num: res.rows.item(i).num
+            investment_num: res.rows.item(i).num,
+            investment_abs_return : 0
          });
         }
 
@@ -145,7 +156,8 @@ export class DbService {
           items.push({ 
             investment_name: res.rows.item(i).investment_type,  
             investment_amount: res.rows.item(i).sum,
-            investment_num: res.rows.item(i).num
+            investment_num: res.rows.item(i).num,
+            investment_abs_return : 0
          });
         }
 
@@ -166,7 +178,8 @@ export class DbService {
           items.push({ 
             investment_name: res.rows.item(i).investment_type,  
             investment_amount: res.rows.item(i).sum,
-            investment_num: res.rows.item(i).num
+            investment_num: res.rows.item(i).num,
+            investment_abs_return : 0
          });
         }
 
@@ -189,7 +202,8 @@ export class DbService {
           items.push({ 
             investment_name: res.rows.item(i).investment_type,  
             investment_amount: res.rows.item(i).sum,
-            investment_num: res.rows.item(i).num
+            investment_num: res.rows.item(i).num,
+            investment_abs_return : 0
          });
         }
 
@@ -211,7 +225,8 @@ export class DbService {
           items.push({ 
             investment_name: res.rows.item(i).investment_type,  
             investment_amount: res.rows.item(i).sum,
-            investment_num: res.rows.item(i).num
+            investment_num: res.rows.item(i).num,
+            investment_abs_return : 0
          });
         }
 
@@ -235,9 +250,9 @@ export class DbService {
     	this.getinvestments();
     	this.getInvestmentsDetails();
       return res;
-    });
+    }).catch(e => console.log(e));
   }
- 
+
   // Delete
   deleteInvestment(id,investment_name)  {
   	this.investment_name=investment_name;
@@ -247,6 +262,38 @@ export class DbService {
     	console.log("In delete Investment :",res);
       this.getinvestments();
       this.getInvestmentsDetails();
-    });
+    }).catch(e => console.log(e));
+  }
+
+  addAbsReturns(Insv,InsvValue){
+   return this.storage.executeSql(`INSERT INTO investment_abs_return (investment_name, investment_absolute_return) VALUES (?, ?)`, [Insv,InsvValue])
+    .then(res => {
+      console.log("In Add Abs Returns : ",res);
+      this.getInvestmentsDetails();
+
+    }).catch(e => console.log(e));
+  }
+  updateAbsReturns(Insv,InsvValue){
+   return this.storage.executeSql(`UPDATE investment_abs_return SET investment_absolute_return = 7`,[])
+    .then(res => {
+      console.log("In Update Abs Returns : ",res);
+      this.getInvestmentsDetails();
+      return res
+    }).catch(e => console.log(e));
+  }
+  getAbsReturns(){
+    var sqlQuery: string = "SELECT * FROM investment_abs_return ";
+    console.log("SQL Query : ",sqlQuery);
+    return this.storage.executeSql(sqlQuery, []).then(res => {
+      console.log("In Get Abs Returns : ",res);
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) { 
+          console.log(res.rows.item(i));
+       
+        }
+        return res;
+
+      }
+    })
   }
 }

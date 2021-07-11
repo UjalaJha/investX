@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'view-investment/:investment_name',
     loadChildren: () => import('./view-investment/view-investment.module').then( m => m.ViewInvestmentPageModule)
+  },
+  {
+    path: 'returns-modal',
+    loadChildren: () => import('./modals/returns-modal/returns-modal.module').then( m => m.ReturnsModalPageModule)
   }
 ];
 @NgModule({

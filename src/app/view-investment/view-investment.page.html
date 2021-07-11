@@ -8,6 +8,33 @@
 </ion-header>
 
 <ion-content>
+	<ion-card>
+		<ion-item>
+			<b>PPF for May 2021</b>
+			<ion-button shape="round" slot="end" (click)="deleteInvestment(data.id)"><ion-icon name="trash" ></ion-icon></ion-button>
+		</ion-item>
+		<ion-item>
+			<b>Amount</b> : 1000
+		</ion-item>
+		<ion-item>
+	    <b>Type</b> : PPF
+  		</ion-item>
+		<ion-item>
+			<b>App invested on</b> : groww
+		</ion-item>
+		<ion-item>
+		  <b>Started on</b> : 07/01/2021
+		</ion-item>
+		<ion-item>
+		  <b>Maturing on</b> : 07/01/2021
+		</ion-item>
+		<ion-item>
+		  <b>Expected ROI</b> : 7%
+		</ion-item>
+		<ion-item>
+			<b>More Information</b> : none
+		</ion-item>
+	</ion-card>
 	<ion-card *ngFor="let data of data">
 		<ion-item>
 			<b>{{data.investment_title}}</b>

@@ -35,8 +35,8 @@ export class AddInvestmentPage implements OnInit {
 			  'investment_amount': [
 			    { type: 'required', message: 'Amount is required' }
 			  ],
-			  'investment_interest_rate': [
-			    { type: 'required', message: 'ROI is required' }
+			  'investment_started_on': [
+			    { type: 'required', message: 'Date is required' }
 			  ]
 			};
 	  } 
@@ -137,12 +137,12 @@ export class AddInvestmentPage implements OnInit {
       investment_amount : new FormControl('', Validators.compose([
            Validators.required
       ])),
-      investment_interest_rate : new FormControl('', Validators.compose([
+      investment_started_on : new FormControl('', Validators.compose([
            Validators.required
       ])),
       investment_app: new FormControl(''),
       investment_type: new FormControl(''),
-	    investment_started_on: new FormControl(''),
+	    investment_interest_rate: new FormControl(''),
 	    investment_maturing_on: new FormControl(''),
 	    investment_more_info : new FormControl(''),
     });
