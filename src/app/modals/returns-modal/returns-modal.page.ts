@@ -63,11 +63,6 @@ export class ReturnsModalPage implements OnInit {
 		      toast.present(); 
 	    })
 	});
-
-	this.db.getAbsReturns().then(async(res) => {
-	  	console.log("In Get Data",res);
-	   
-    })
   }
 
 }

@@ -102,8 +102,8 @@ export class DbService {
     }).catch(e => console.log(e));
   }
   getInvestmentsDetails(){
-  	var sqlQuery: string = `SELECT SUM(investment_amount) as sum, COUNT(*) as num, i.investment_name, iar.investment_absolute_return
-  	FROM investment as i left join investment_abs_return as iar  where i.investment_name = iar.investment_name GROUP BY i.investment_name`;
+  	var sqlQuery: string = `SELECT SUM(investment_amount) as sum, COUNT(*) as num, iar.investment_name, iar.investment_absolute_return
+  	FROM investment_abs_return as iar left join investment as i  on i.investment_name = iar.investment_name GROUP BY iar.investment_name`;
   	console.log("SQL Query : ",sqlQuery)
     return this.storage.executeSql(sqlQuery, []).then(res => {
     	console.log("In Get Investments Details : ",res);

@@ -39,7 +39,9 @@ export class Tab1Page {
   	this.db.dbState().subscribe((res) => {
       console.log("In Tab1Page dbState : ",res);
 	    if(res){
+
         this.db.addAbsReturns("ProvidentFund",5);
+        this.db.addAbsReturns("BankDeposit",5);
         this.db.addAbsReturns("MutualFund",5);
         this.db.addAbsReturns("Crypto",5);
         this.db.addAbsReturns("SharesAndStocks",5);
@@ -49,7 +51,9 @@ export class Tab1Page {
         this.db.addAbsReturns("InsurancePlans",5);
         this.db.addAbsReturns("RetirementFund",5);
         this.db.addAbsReturns("ChildFutures",5);
+        this.db.addAbsReturns("GovernmentFund",5);
         this.db.addAbsReturns("Others",5);
+
         // this.db.addInvestment("ProvidentFund","PPF for April 2021",2500,"ppf","","2021-04-01","",7,"");
         // this.db.addInvestment("ProvidentFund","PPF for May 2021",2500,"ppf","","2021-05-01","",7,"");
         // this.db.addInvestment("ProvidentFund","PPF for June 2021",2500,"ppf","","2021-06-01","",7,"");
@@ -60,12 +64,12 @@ export class Tab1Page {
         // this.db.addInvestment("MutualFund","Equity for April 2021",10000,"equity","","2021-04-01","",7,"");
         // this.db.addInvestment("MutualFund","Equity for June 2021",10000,"equity","","2021-06-01","",7,"");
         // this.db.addInvestment("MutualFund","Equity for July 2021",10000,"equity","","2021-07-01","",7,"");
-        // this.db.addInvestment("BankDeposit","FD 1.0",600000,"fixeddeposit","","2021-03-15","",5,"");
-        // this.db.addInvestment("BankDeposit","FD 2.0",56966,"taxsavingfd","","2021-04-01","",5,"");
-        // this.db.addInvestment("BankDeposit","FD 3.0",100000,"fixeddeposit","","2021-04-30","",5,"");
+        // this.db.addInvestment("BankDeposit","FD 1.0",10000,"fixeddeposit","","2021-03-15","",5,"");
+        // this.db.addInvestment("BankDeposit","FD 2.0",10000,"taxsavingfd","","2021-04-01","",5,"");
+        // this.db.addInvestment("BankDeposit","FD 3.0",10000,"fixeddeposit","","2021-04-30","",5,"");
 
 	      this.db.fetchInvestmentsDetails().subscribe(item => {
-          console.log("In getInvestmentsDetails : ",item);
+          console.log("In getInvestmentsDetails Subscriber: ",item);
           var chartColors = {
             ProvidentFund: 'rgb(255, 168, 96)',
             MutualFund: 'rgb(168, 216, 168)',
@@ -89,7 +93,6 @@ export class Tab1Page {
           this.dataName=[];
           this.dataColour=[];
           for (var i = 0; i < item.length; i++) {  
-          		console.log("Item Single:",item[i].investment_name);
           		this.mapAmount.set(item[i].investment_name,item[i].investment_amount);
 							this.mapNum.set(item[i].investment_name,item[i].investment_num);
               this.mapAbsReturn.set(item[i].investment_name,item[i].investment_abs_return);
