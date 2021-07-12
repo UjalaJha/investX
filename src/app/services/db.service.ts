@@ -274,7 +274,7 @@ export class DbService {
     }).catch(e => console.log(e));
   }
   updateAbsReturns(Insv,InsvValue){
-   return this.storage.executeSql(`UPDATE investment_abs_return SET investment_absolute_return = 7`,[])
+   return this.storage.executeSql(`UPDATE investment_abs_return SET investment_absolute_return = ? where investment_name = ?`,[InsvValue,Insv])
     .then(res => {
       console.log("In Update Abs Returns : ",res);
       this.getInvestmentsDetails();

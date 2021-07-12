@@ -27,10 +27,9 @@ export class ReturnsModalPage implements OnInit {
     console.table(this.navParams);
     this.mapAbsReturn = this.navParams.data.mapAbsReturn;
     this.mainForm = this.formBuilder.group({
-      ProvidentFund: new FormControl(''),
-      MutualFund: new FormControl(''),
-      BankDeposit: new FormControl('')
-	  
+      ProvidentFund: new FormControl(this.mapAbsReturn.get('ProvidentFund')),
+      MutualFund: new FormControl(this.mapAbsReturn.get('MutualFund')),
+      BankDeposit: new FormControl(this.mapAbsReturn.get('BankDeposit'))
     });
   }
 
@@ -40,17 +39,21 @@ export class ReturnsModalPage implements OnInit {
   }
 
   storeReturns(){
-	this.db.updateAbsReturns(
-	    "ProvidentFund",7.5
-  	).then(async(res) => {
-	  	console.log("In Store Data",res);
-	    this.mainForm.reset();
-	    let toast = await this.toast.create({
-	      message: 'Returns Updated',
-	      duration: 2500
-	    });
-	      toast.present(); 
-    })
+  	this.mapAbsReturn.forEach((mapValue: boolean, mapKey: string) => {
+    	console.log(mapKey,eval(`this.mainForm.value.${mapKey}`));
+    	this.db.updateAbsReturns(
+	    mapKey,eval(`this.mainForm.value.${mapKey}`)
+	  	).then(async(res) => {
+		  	console.log("In Store Data",res);
+		    this.mainForm.reset();
+		    let toast = await this.toast.create({
+		      message: 'Returns Updated',
+		      duration: 2500
+		    });
+		      toast.present(); 
+	    })
+	});
+
 	this.db.getAbsReturns().then(async(res) => {
 	  	console.log("In Get Data",res);
 	   
