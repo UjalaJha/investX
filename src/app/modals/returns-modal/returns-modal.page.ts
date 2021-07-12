@@ -24,12 +24,22 @@ export class ReturnsModalPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.table(this.navParams);
     this.mapAbsReturn = this.navParams.data.mapAbsReturn;
     this.mainForm = this.formBuilder.group({
       ProvidentFund: new FormControl(this.mapAbsReturn.get('ProvidentFund')),
       MutualFund: new FormControl(this.mapAbsReturn.get('MutualFund')),
-      BankDeposit: new FormControl(this.mapAbsReturn.get('BankDeposit'))
+      BankDeposit: new FormControl(this.mapAbsReturn.get('BankDeposit')),
+      Crypto: new FormControl(this.mapAbsReturn.get('Crypto')),
+      SharesAndStocks: new FormControl(this.mapAbsReturn.get('SharesAndStocks')),
+      Bonds: new FormControl(this.mapAbsReturn.get('Bonds')),
+      Commodity: new FormControl(this.mapAbsReturn.get('Commodity')),
+      LIC: new FormControl(this.mapAbsReturn.get('LIC')),
+      InsurancePlans: new FormControl(this.mapAbsReturn.get('InsurancePlans')),
+      ETF: new FormControl(this.mapAbsReturn.get('ETF')),
+      RetirementFund: new FormControl(this.mapAbsReturn.get('RetirementFund')),
+      ChildFutures: new FormControl(this.mapAbsReturn.get('ChildFutures')),
+      GovernmentFund: new FormControl(this.mapAbsReturn.get('GovernmentFund')),
+      Others: new FormControl(this.mapAbsReturn.get('Others'))
     });
   }
 

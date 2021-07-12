@@ -39,22 +39,30 @@ export class Tab1Page {
   	this.db.dbState().subscribe((res) => {
       console.log("In Tab1Page dbState : ",res);
 	    if(res){
-        this.db.addAbsReturns("ProvidentFund",6.1);
-        this.db.addAbsReturns("MutualFund",6.2);
-        this.db.addAbsReturns("BankDeposit",6.3);
-        this.db.addInvestment("ProvidentFund","PPF for April 2021",2500,"ppf","","2021-04-01","",7,"");
-        this.db.addInvestment("ProvidentFund","PPF for May 2021",2500,"ppf","","2021-05-01","",7,"");
-        this.db.addInvestment("ProvidentFund","PPF for June 2021",2500,"ppf","","2021-06-01","",7,"");
-        this.db.addInvestment("ProvidentFund","PPF for July 2021",2500,"ppf","","2021-07-01","",7,"");
-        this.db.addInvestment("MutualFund","ELSS for April 2021",10000,"elss","","2021-04-01","",7,"");
-        this.db.addInvestment("MutualFund","ELSS for June 2021",10000,"elss","","2021-06-01","",7,"");
-        this.db.addInvestment("MutualFund","ELSS for July 2021",10000,"elss","","2021-07-01","",7,"");
-        this.db.addInvestment("MutualFund","Equity for April 2021",10000,"equity","","2021-04-01","",7,"");
-        this.db.addInvestment("MutualFund","Equity for June 2021",10000,"equity","","2021-06-01","",7,"");
-        this.db.addInvestment("MutualFund","Equity for July 2021",10000,"equity","","2021-07-01","",7,"");
-        this.db.addInvestment("BankDeposit","FD 1.0",600000,"fixeddeposit","","2021-03-15","",5,"");
-        this.db.addInvestment("BankDeposit","FD 2.0",56966,"taxsavingfd","","2021-04-01","",5,"");
-        this.db.addInvestment("BankDeposit","FD 3.0",100000,"fixeddeposit","","2021-04-30","",5,"");
+        this.db.addAbsReturns("ProvidentFund",5);
+        this.db.addAbsReturns("MutualFund",5);
+        this.db.addAbsReturns("Crypto",5);
+        this.db.addAbsReturns("SharesAndStocks",5);
+        this.db.addAbsReturns("Bonds",5);
+        this.db.addAbsReturns("Commodity",5);
+        this.db.addAbsReturns("LIC",5);
+        this.db.addAbsReturns("InsurancePlans",5);
+        this.db.addAbsReturns("RetirementFund",5);
+        this.db.addAbsReturns("ChildFutures",5);
+        this.db.addAbsReturns("Others",5);
+        // this.db.addInvestment("ProvidentFund","PPF for April 2021",2500,"ppf","","2021-04-01","",7,"");
+        // this.db.addInvestment("ProvidentFund","PPF for May 2021",2500,"ppf","","2021-05-01","",7,"");
+        // this.db.addInvestment("ProvidentFund","PPF for June 2021",2500,"ppf","","2021-06-01","",7,"");
+        // this.db.addInvestment("ProvidentFund","PPF for July 2021",2500,"ppf","","2021-07-01","",7,"");
+        // this.db.addInvestment("MutualFund","ELSS for April 2021",10000,"elss","","2021-04-01","",7,"");
+        // this.db.addInvestment("MutualFund","ELSS for June 2021",10000,"elss","","2021-06-01","",7,"");
+        // this.db.addInvestment("MutualFund","ELSS for July 2021",10000,"elss","","2021-07-01","",7,"");
+        // this.db.addInvestment("MutualFund","Equity for April 2021",10000,"equity","","2021-04-01","",7,"");
+        // this.db.addInvestment("MutualFund","Equity for June 2021",10000,"equity","","2021-06-01","",7,"");
+        // this.db.addInvestment("MutualFund","Equity for July 2021",10000,"equity","","2021-07-01","",7,"");
+        // this.db.addInvestment("BankDeposit","FD 1.0",600000,"fixeddeposit","","2021-03-15","",5,"");
+        // this.db.addInvestment("BankDeposit","FD 2.0",56966,"taxsavingfd","","2021-04-01","",5,"");
+        // this.db.addInvestment("BankDeposit","FD 3.0",100000,"fixeddeposit","","2021-04-30","",5,"");
 
 	      this.db.fetchInvestmentsDetails().subscribe(item => {
           console.log("In getInvestmentsDetails : ",item);
