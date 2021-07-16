@@ -55,7 +55,6 @@ export class ReturnsModalPage implements OnInit {
 	    mapKey,eval(`this.mainForm.value.${mapKey}`)
 	  	).then(async(res) => {
 		  	console.log("In Store Data",res);
-		    this.mainForm.reset();
 		    let toast = await this.toast.create({
 		      message: 'Returns Updated',
 		      duration: 2500
