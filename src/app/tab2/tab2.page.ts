@@ -14,7 +14,7 @@ export class Tab2Page {
   }
 
   ionViewDidEnter(){
-  	this.onChange(this.defaultYear)
+  	this.onChange("Loading Tax for : "+this.defaultYear)
   }
 
   onChange(year){

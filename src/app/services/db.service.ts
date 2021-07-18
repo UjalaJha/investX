@@ -49,7 +49,22 @@ export class DbService {
             );`
             ,[])
             .then(()=>{
+              this.addAbsReturns("ProvidentFund",5);
+              this.addAbsReturns("BankDeposit",5);
+              this.addAbsReturns("MutualFund",5);
+              this.addAbsReturns("Crypto",5);
+              this.addAbsReturns("SharesAndStocks",5);
+              this.addAbsReturns("Bonds",5);
+              this.addAbsReturns("Commodity",5);
+              this.addAbsReturns("LIC",5);
+              this.addAbsReturns("InsurancePlans",5);
+              this.addAbsReturns("RetirementFund",5);
+              this.addAbsReturns("ChildFutures",5);
+              this.addAbsReturns("GovernmentFund",5);
+              this.addAbsReturns("ETF",5);
+              this.addAbsReturns("Others",5);
               this.isDbReady.next(true);
+              console.log("db init done");
             }).catch(e => console.log(e));
           }).catch(e => console.log(e));
 	      }).catch(e => console.log(e));
