@@ -3,7 +3,7 @@
   	<ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>Add Your {{investment_full_name}} Investment</ion-title>
+    <ion-title>Add {{investment_full_name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +11,7 @@
 	<form [formGroup]="mainForm" (ngSubmit)="storeData()">
 		<ion-card>
 			<ion-item>
-				<ion-input placeholder="Enter Title of Investment * " formControlName="investment_title" type="text" required></ion-input>
+				<ion-icon name="pricetags-sharp"></ion-icon><ion-input placeholder="Enter Title of Investment * " formControlName="investment_title" type="text" required></ion-input>
 			</ion-item>
 			<div *ngFor="let validation of validation_messages.investment_title">
 			  <div class="error-message" *ngIf="mainForm.get('investment_title').hasError(validation.type) && (mainForm.get('investment_title').touched || mainForm.get('investment_title').dirty)">
@@ -19,7 +19,7 @@
 			  </div>
 			</div>
 			<ion-item>
-				<ion-input placeholder="Enter Amount Invested * " formControlName="investment_amount" type="number" required></ion-input>
+				<ion-icon name="cash-sharp"></ion-icon><ion-input placeholder="Enter Amount Invested * " formControlName="investment_amount" type="number" required></ion-input>
 			</ion-item>
 			<div *ngFor="let validation of validation_messages.investment_amount">
 			  <div class="error-message" *ngIf="mainForm.get('investment_amount').hasError(validation.type) && (mainForm.get('investment_amount').touched || mainForm.get('investment_amount').dirty)">
@@ -27,7 +27,7 @@
 			  </div>
 			</div>
 			<ion-item>
-			  <ion-datetime placeholder="Started On *" formControlName="investment_started_on"></ion-datetime>
+			  <ion-icon name="calendar-number-sharp"></ion-icon><ion-datetime placeholder="Started On *" formControlName="investment_started_on"></ion-datetime>
 			</ion-item>
 			<div *ngFor="let validation of validation_messages.investment_started_on">
 			  <div class="error-message" *ngIf="mainForm.get('investment_started_on').hasError(validation.type) && (mainForm.get('investment_started_on').touched || mainForm.get('investment_started_on').dirty)">
@@ -35,29 +35,34 @@
 			  </div>
 			</div>
 			<ion-item *ngIf="data">
+				<ion-icon name="caret-down-circle-sharp"></ion-icon>
 			    <ion-select placeholder="Type" formControlName="investment_type" >
 			      <ion-select-option *ngFor="let entry of data | keyvalue" value="{{entry.key}}">{{entry.value}}</ion-select-option>
 			    </ion-select>
 	  		</ion-item>
 			<ion-item>
+			  <ion-icon name="paper-plane-sharp"></ion-icon>
 			  <ion-input placeholder="Expected Rate of Interest %" formControlName="investment_interest_rate"></ion-input>
 			</ion-item>
 			
 			
 			<ion-item>
+				<ion-icon name="apps-sharp"></ion-icon>
 				<ion-input placeholder="App Invested On" type="text" formControlName="investment_app"></ion-input>
 			</ion-item>
 			
 			<ion-item>
-			  <ion-datetime placeholder="Maturing On (Optional)" formControlName="investment_maturing_on" max="2050-10-31"></ion-datetime>
+				<ion-icon name="calendar-number-sharp"></ion-icon>
+			  	<ion-datetime placeholder="Maturing On (Optional)" formControlName="investment_maturing_on" max="2050-10-31"></ion-datetime>
 			</ion-item>
 			
 			<ion-item>
+				<ion-icon style="margin-top:10px;" name="book-sharp"></ion-icon>
 				<ion-textarea placeholder="Enter more information here..." formControlName="investment_more_info"></ion-textarea>
 			</ion-item>
 		</ion-card>
 		<section>
-			<ion-button class="ion-padding" type="submit" expand="block" [disabled]="!mainForm.valid">Add Investment</ion-button>
+			<ion-button class="ion-padding" type="submit" expand="full" [disabled]="!mainForm.valid">Add Investment</ion-button>
 		</section>
 	</form>
 </ion-content>

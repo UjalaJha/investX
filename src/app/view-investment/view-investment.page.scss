@@ -1,7 +1,10 @@
-ion-card{
+#single-card{
 	border-radius : 0px;
-	box-shadow : #fff;
+	box-shadow : none;
 
+}
+ion-content{
+    --background: #D3D3D3;
 }
 ion-icon{
 	color:#E99497;
@@ -13,7 +16,7 @@ h6{
 	margin-top:10px;
 	font-size : 15px;
 }
-div{
+#single-element{
 	margin-left:15px;
 	margin-bottom:10px;
 	font-size : 13px;

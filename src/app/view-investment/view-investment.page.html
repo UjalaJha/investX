@@ -8,68 +8,41 @@
 </ion-header>
 
 <ion-content>
-	<ion-card>
+	<ion-card id="single-card" *ngFor="let data of data">
 
 		<ion-item>
 			<ion-button expand="full"  slot="end" (click)="deleteInvestment(data.id)">Delete</ion-button>
-			<ion-icon name="pricetags-sharp"></ion-icon><div><h6>Investment Title</h6>
-			PPF for May 2021</div>
+			<ion-icon name="pricetags-sharp"></ion-icon><div id="single-element"><h6>Investment Title</h6>
+			{{data.investment_title}}</div>
 			
 		</ion-item>
 		<ion-item>
-			<ion-icon name="cash-sharp"></ion-icon><div><h6>Amount</h6>
-			1000</div>
+			<ion-icon name="cash-sharp"></ion-icon><div id="single-element"><h6>Amount</h6>
+			{{data.investment_amount | number}}</div>
 		</ion-item>
 		<ion-item>
-	    	<ion-icon name="caret-down-circle-sharp"></ion-icon><div><h6>Type</h6>
-	    	PPF</div>
+	    	<ion-icon name="caret-down-circle-sharp"></ion-icon><div id="single-element"><h6>Type</h6>
+	    	{{data.investment_type}}</div>
   		</ion-item>
 		<ion-item>
-			<ion-icon name="apps-sharp"></ion-icon><div><h6>App invested on</h6>
-			groww</div>
+			<ion-icon name="apps-sharp"></ion-icon><div id="single-element"><h6>App invested on</h6>
+			{{data.investment_app}}</div>
 		</ion-item>
 		<ion-item>
-		  <ion-icon name="calendar-number-sharp"></ion-icon><div><h6>Started on</h6>
-		  07/01/2021</div>
+		  <ion-icon name="calendar-number-sharp"></ion-icon><div id="single-element"><h6>Started on</h6>
+		  {{data.investment_started_on | date}}</div>
 		</ion-item>
 		<ion-item>
-		  <ion-icon name="calendar-number-sharp"></ion-icon><div><h6>Maturing on</h6>
-		  07/01/2021</div>
+		  <ion-icon name="calendar-number-sharp"></ion-icon><div id="single-element"><h6>Maturing on</h6>
+		 {{data.investment_maturing_on | date}}</div>
 		</ion-item>
 		<ion-item>
-		  <ion-icon name="paper-plane-sharp"></ion-icon><div><h6>Expected ROI</h6>
-		  7%</div>
+		  <ion-icon name="paper-plane-sharp"></ion-icon><div id="single-element"><h6>Expected ROI</h6>
+		  {{data.investment_interest_rate}}%</div>
 		</ion-item>
-		<ion-item>
-			<ion-icon name="book-sharp"></ion-icon><div><h6>More Information</h6>
-			none</div>
-		</ion-item>
-	</ion-card>
-	<ion-card *ngFor="let data of data">
-		<ion-item>
-			<b>{{data.investment_title}}</b>
-			<ion-button shape="round" slot="end" (click)="deleteInvestment(data.id)"><ion-icon name="trash" ></ion-icon></ion-button>
-		</ion-item>
-		<ion-item>
-			<b>Amount</b> : {{data.investment_amount | number}}
-		</ion-item>
-		<ion-item>
-	    <b>Type</b> : {{data.investment_type}}
-  		</ion-item>
-		<ion-item>
-			<b>App invested on</b> : {{data.investment_app}}
-		</ion-item>
-		<ion-item>
-		  <b>Started on</b> : {{data.investment_started_on | date}}
-		</ion-item>
-		<ion-item>
-		  <b>Maturing on</b> : {{data.investment_maturing_on | date}}
-		</ion-item>
-		<ion-item>
-		  <b>Expected ROI</b> : {{data.investment_interest_rate}}%
-		</ion-item>
-		<ion-item>
-			<b>More Information</b> : {{data.investment_more_info}}
+		<ion-item  lines="none">
+			<ion-icon name="book-sharp"></ion-icon><div id="single-element"><h6>More Information</h6>
+			{{data.investment_more_info}}</div>
 		</ion-item>
 	</ion-card>
 </ion-content>
