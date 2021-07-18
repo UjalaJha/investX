@@ -46,6 +46,7 @@ export class DbService {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             investment_name TEXT, 
             investment_absolute_return TEXT
+            UNIQUE(investment_name, investment_absolute_return)
             );`
             ,[])
             .then(()=>{
@@ -281,11 +282,10 @@ export class DbService {
   }
 
   addAbsReturns(Insv,InsvValue){
-   return this.storage.executeSql(`INSERT INTO investment_abs_return (investment_name, investment_absolute_return) VALUES (?, ?)`, [Insv,InsvValue])
+   return this.storage.executeSql(`INSERT OR IGNORE INTO investment_abs_return (investment_name, investment_absolute_return) VALUES (?, ?);`, [Insv,InsvValue])
     .then(res => {
       console.log("In Add Abs Returns : ",res);
       this.getInvestmentsDetails();
-
     }).catch(e => console.log(e));
   }
   updateAbsReturns(Insv,InsvValue){
