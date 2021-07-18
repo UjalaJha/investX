@@ -124,7 +124,7 @@ export class DbService {
   getTaxPF(year){
     var sqlQuery: string = `SELECT count(*) as num,sum(investment_amount) as sum,investment_name
     FROM investment  WHERE investment_started_on >= '20`+[year-1]+`-04-01'
-    AND investment_started_on <= '20`+year+`-03-31' AND investment_name='ProvidentFund';`;
+    AND investment_started_on <= '20`+year+`-03-31' AND investment_name="ProvidentFund";`;
     console.log("SQL Query : ",sqlQuery)
     return this.storage.executeSql(sqlQuery, []).then(res => {
       console.log("In Get Tax Details : ",res);
@@ -146,7 +146,7 @@ export class DbService {
   getTaxElss(year){
     var sqlQuery: string = `SELECT count(*) as num,sum(investment_amount) as sum,investment_type
     FROM investment  WHERE investment_started_on >= '20`+[year-1]+`-04-01'
-    AND investment_started_on <= '20`+year+`-03-31' AND investment_type='elss';`;
+    AND investment_started_on <= '20`+year+`-03-31' AND investment_type="Elss";`;
     console.log("SQL Query : ",sqlQuery)
     return this.storage.executeSql(sqlQuery, []).then(res => {
       console.log("In Get Tax Details : ",res);
@@ -168,7 +168,7 @@ export class DbService {
   getTaxSSY(year){
     var sqlQuery: string = `SELECT count(*) as num,sum(investment_amount) as sum,investment_type
     FROM investment  WHERE investment_started_on >= '20`+[year-1]+`-04-01'
-    AND investment_started_on <= '20`+year+`-03-31' AND investment_type='ssy';`;
+    AND investment_started_on <= '20`+year+`-03-31' AND investment_type="SukanyaSamridhiYojayana";`;
     console.log("SQL Query : ",sqlQuery)
     return this.storage.executeSql(sqlQuery, []).then(res => {
       console.log("In Get Tax Details : ",res);
@@ -191,7 +191,7 @@ export class DbService {
   getTaxInsurance(year){
     var sqlQuery: string = `SELECT count(*) as num,sum(investment_amount) as sum,investment_type
     FROM investment  WHERE investment_started_on >= '20`+[year-1]+`-04-01'
-    AND investment_started_on <= '20`+year+`-03-31' AND investment_name='lic'
+    AND investment_started_on <= '20`+year+`-03-31' AND investment_name="LIC"
     OR investment_type='8CtaxSavingInsurance';`;
     console.log("SQL Query : ",sqlQuery)
     return this.storage.executeSql(sqlQuery, []).then(res => {
@@ -215,7 +215,7 @@ export class DbService {
   getTaxFD(year){
     var sqlQuery: string = `SELECT count(*) as num,sum(investment_amount) as sum,investment_type
     FROM investment  WHERE investment_started_on >= '20`+[year-1]+`-04-01'
-    AND investment_started_on <= '20`+year+`-03-31' AND investment_type='taxsavingfd';`;
+    AND investment_started_on <= '20`+year+`-03-31' AND investment_type="TaxSavingFD";`;
     console.log("SQL Query : ",sqlQuery)
     return this.storage.executeSql(sqlQuery, []).then(res => {
       console.log("In Get Tax Details : ",res);
@@ -242,6 +242,7 @@ export class DbService {
   	this.investment_name=investment_name;
     let data = [investment_name, investment_title,investment_amount,investment_type,investment_app,
   	investment_started_on,investment_maturing_on,investment_interest_rate,investment_more_info];
+    console.log(data);
     return this.storage.executeSql(`INSERT INTO investment (investment_name, investment_title,investment_amount,
     	investment_type,investment_app,investment_started_on,investment_maturing_on,
     	investment_interest_rate,investment_more_info) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, data)

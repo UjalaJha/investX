@@ -36,7 +36,7 @@
 			</div>
 			<ion-item *ngIf="data">
 				<ion-icon name="caret-down-circle-sharp"></ion-icon>
-			    <ion-select placeholder="Type" formControlName="investment_type" >
+			    <ion-select placeholder="Type" formControlName="investment_type">
 			      <ion-select-option *ngFor="let entry of data | keyvalue" value="{{entry.key}}">{{entry.value}}</ion-select-option>
 			    </ion-select>
 	  		</ion-item>
