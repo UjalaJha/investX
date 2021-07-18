@@ -45,46 +45,45 @@ export class AddInvestmentPage implements OnInit {
   	let map = new Map();
 		switch (this.investment_name) {
 		    case 'ProvidentFund':
-		   			map.set("ppf","PPF");
-						map.set("epf","EPF");
-						map.set("vpf","VPF");
+		   			map.set("PPF","PPF");
+						map.set("EPF","EPF");
+						map.set("VPF","VPF");
 						this.data=map;
 						this.investment_full_name="Provident Fund";
 		   			console.log("Data of Type : ",this.data);
 		        break;
 		    case 'MutualFund':
-		    		map.set("equity","Equity");
-		    		map.set("elss","Elss");
-						map.set("liquid","Liquid");
-						map.set("debt","Debt");
-						map.set("hybrid","Hybrid");
-						map.set("solutionoriented","SolutionOriented");
+		    		map.set("Equity","Equity");
+		    		map.set("Elss","Elss");
+						map.set("Liquid","Liquid");
+						map.set("Debt","Debt");
+						map.set("Hybrid","Hybrid");
+						map.set("SolutionOriented","SolutionOriented");
 						this.data=map;
 						this.investment_full_name="Mutual Fund";
 		   			console.log("Data of Type : ",this.data);
 		        break;
 		    case 'BankDeposit':
-		      	map.set("fixeddeposit","Regular FD");
-						map.set("recurringdeposit","Recurring Deposit");
-						map.set("taxsavingfd","Tax Saving FD");
+		      	map.set("RegularFD","RegularFD");
+						map.set("RecurringDeposit","RecurringDeposit");
+						map.set("TaxSavingFD","TaxSavingFD");
 						this.investment_full_name="Bank Deposit";
 						this.data=map;
 		        break;
 		    case 'Crypto':
-		        map.set("bitcoin","Bitcoin");
-						map.set("ether","Ether");
-						map.set("dogecoin","Dogecoin");
-						map.set("others","Others");
+		        map.set("Bitcoin","Bitcoin");
+						map.set("Ether","Ether");
+						map.set("Dogecoin","Dogecoin");
+						map.set("Others","Others");
 						this.data=map;
 						this.investment_full_name="CryptoCurrency";
 		        break;
 		    case 'SharesAndStocks':
-		    		map.set("usstock","USStock");
-		    		map.set("indiastock","IndiaStock");
+		    		map.set("USStock","USStock");
+		    		map.set("IndiaStock","IndiaStock");
 		    		this.data=map;
 		    		this.investment_full_name="Stocks and Shares";
-		        console.log("It is a Thursday.");
-		        break;
+		     		break;
 		    case 'Commodity':
 		        this.data=null;
 		        this.investment_full_name="Commodity"
@@ -107,12 +106,12 @@ export class AddInvestmentPage implements OnInit {
 	        	this.investment_full_name="ETF";
 		        break;
 	      case 'RetirementFund':
-	      		map.set("nps","NationalPensionScheme");
+	      		map.set("NationalPensionScheme","NationalPensionScheme");
 						this.data=map;
 	      		this.investment_full_name="Retirement Fund"
 		        break;
 	      case 'ChildFutures':
-	      		map.set("ssy","SukanyaSamridhiYojayana");
+	      		map.set("SukanyaSamridhiYojayana","SukanyaSamridhiYojayana");
 						this.data=map;
 						this.investment_full_name="Child Futures"
 		        break;

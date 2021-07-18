@@ -52,6 +52,7 @@ export class Tab1Page {
         this.db.addAbsReturns("RetirementFund",5);
         this.db.addAbsReturns("ChildFutures",5);
         this.db.addAbsReturns("GovernmentFund",5);
+        this.db.addAbsReturns("ETF",5);
         this.db.addAbsReturns("Others",5);
 
         // this.db.addInvestment("ProvidentFund","PPF for April 2021",2500,"ppf","","2021-04-01","",7,"");
