@@ -45,7 +45,7 @@ export class DbService {
             db.executeSql(`CREATE TABLE IF NOT EXISTS investment_abs_return(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             investment_name TEXT, 
-            investment_absolute_return TEXT
+            investment_absolute_return TEXT,
             UNIQUE(investment_name, investment_absolute_return)
             );`
             ,[])
