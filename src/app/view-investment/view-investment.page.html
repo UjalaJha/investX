@@ -9,30 +9,40 @@
 
 <ion-content>
 	<ion-card>
+
 		<ion-item>
-			<b>PPF for May 2021</b>
-			<ion-button shape="round" slot="end" (click)="deleteInvestment(data.id)"><ion-icon name="trash" ></ion-icon></ion-button>
+			<ion-button expand="full"  slot="end" (click)="deleteInvestment(data.id)">Delete</ion-button>
+			<ion-icon name="pricetags-sharp"></ion-icon><div><h6>Investment Title</h6>
+			PPF for May 2021</div>
+			
 		</ion-item>
 		<ion-item>
-			<b>Amount</b> : 1000
+			<ion-icon name="cash-sharp"></ion-icon><div><h6>Amount</h6>
+			1000</div>
 		</ion-item>
 		<ion-item>
-	    <b>Type</b> : PPF
+	    	<ion-icon name="caret-down-circle-sharp"></ion-icon><div><h6>Type</h6>
+	    	PPF</div>
   		</ion-item>
 		<ion-item>
-			<b>App invested on</b> : groww
+			<ion-icon name="apps-sharp"></ion-icon><div><h6>App invested on</h6>
+			groww</div>
 		</ion-item>
 		<ion-item>
-		  <b>Started on</b> : 07/01/2021
+		  <ion-icon name="calendar-number-sharp"></ion-icon><div><h6>Started on</h6>
+		  07/01/2021</div>
 		</ion-item>
 		<ion-item>
-		  <b>Maturing on</b> : 07/01/2021
+		  <ion-icon name="calendar-number-sharp"></ion-icon><div><h6>Maturing on</h6>
+		  07/01/2021</div>
 		</ion-item>
 		<ion-item>
-		  <b>Expected ROI</b> : 7%
+		  <ion-icon name="paper-plane-sharp"></ion-icon><div><h6>Expected ROI</h6>
+		  7%</div>
 		</ion-item>
 		<ion-item>
-			<b>More Information</b> : none
+			<ion-icon name="book-sharp"></ion-icon><div><h6>More Information</h6>
+			none</div>
 		</ion-item>
 	</ion-card>
 	<ion-card *ngFor="let data of data">

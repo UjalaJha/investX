@@ -161,7 +161,7 @@ export class Tab1Page {
           options: {
             title: {
               display: true,
-              text: 'Investment By Amount',
+              text: 'Your Portfolio',
               fontStyle: 'bold',
               fontFamily : "Montserrat",
               fontSize: 20
