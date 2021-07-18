@@ -14,11 +14,12 @@ export class Tab2Page {
   }
 
   ionViewDidEnter(){
-  	this.onChange("Loading Tax for : "+this.defaultYear)
+
+  	this.onChange(this.defaultYear)
   }
 
   onChange(year){
-		console.log(year)
+		console.log("Loading Tax for :"+year);
 		this.mapTax=new Map();
 		this.db.getTaxPF(year).then(res=> {
     		this.mapTax.set(res[0].investment_name,res[0].investment_amount);
