@@ -50,7 +50,6 @@ export class DbService {
             ,[])
             .then(()=>{
               this.isDbReady.next(true);
-              this.getinvestments();
             }).catch(e => console.log(e));
           }).catch(e => console.log(e));
 	      }).catch(e => console.log(e));
