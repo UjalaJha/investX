@@ -1,6 +1,31 @@
 ion-icon {
     font-size: 140%; 
 }
+.record {
+    margin: 0% 2% 0% 5%;
+	padding: 0%;
+	// background-color: red; 
+	h6{
+		font-size: 15px;
+	}
+	p{
+		font-size: 12px;
+	}
+	ion-badge{
+		font-size: 10px;
+	}
+	
+}
+.record-money {
+    margin: 10% 0px 0px 10%;
+}
+hr{
+	background-color:grayscale($color: #e4caca);
+}
+h5{
+	margin-left: 10px;
+	color: black;
+}
 ion-card{
 	border-radius : 0px;
 	box-shadow : #fff;

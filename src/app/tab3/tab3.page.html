@@ -1,25 +1,96 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title>
-      Investment Calculator
+      Investments
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" id="content">
   <div padding>
-    <ion-segment [(ngModel)]="pet">
-      <ion-segment-button value="kittens">
-        SIP 
+    <ion-segment [(ngModel)]="product">
+      <ion-segment-button value="portfolio">
+        Portfolio
       </ion-segment-button>
-      <ion-segment-button value="puppies">
-        Bank Deposit
+      <ion-segment-button value="sip">
+        SIP POWER
       </ion-segment-button>
+      
     </ion-segment>
   </div>
 
-  <div [ngSwitch]="pet">
-    <ion-list *ngSwitchCase="'kittens'">
+  <div [ngSwitch]="product">
+
+    <ion-list *ngSwitchCase="'portfolio'">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title color="primary">&nbsp;&nbsp;Investment Options</ion-card-title>
+	        <ion-card-subtitle>Curated List of Product Suggested by Citi Experts to Cater Your Investment Needs </ion-card-subtitle>
+        </ion-card-header>
+        <hr>
+        <ion-card-content>
+
+          
+            <ion-row>
+              <ion-col size="6" class="record">
+                <h6>AMC Hybrid Balanced Fund</h6>
+                <ion-badge color="warning">medium risk</ion-badge>
+              </ion-col>
+              <ion-col class="record-money">
+                <div align="right"><ion-button>Default&nbsp;</ion-button><ion-button>More&nbsp;</ion-button></div>
+              </ion-col>
+            </ion-row>
+            <hr>
+            <ion-row>
+              <ion-col size="6" class="record">
+                <h6>AMC Bluechip Fund</h6>
+                <ion-badge color="warning">high risk</ion-badge>
+              </ion-col>
+              <ion-col class="record-money">
+                <div align="right"><ion-button>More&nbsp;</ion-button></div>
+              </ion-col>
+            </ion-row>
+            <hr>
+            <ion-row>
+              <ion-col size="6" class="record">
+                <h6>AMC Technology Fund</h6>
+                <ion-badge color="danger">medium risk</ion-badge>
+              </ion-col>
+              <ion-col class="record-money">
+                <div align="right"><ion-button>More&nbsp;</ion-button></div>
+              </ion-col>
+            </ion-row>
+            <hr>
+            <ion-row>
+              <ion-col size="6" class="record">
+                <h6>AMC Debt Fund</h6>
+                <ion-badge color="success">low risk</ion-badge>
+              </ion-col>
+              <ion-col class="record-money">
+                <div align="right"><ion-button>More&nbsp;</ion-button></div>
+              </ion-col>
+            </ion-row>
+            <hr>
+            <ion-row>
+              <ion-col size="6" class="record">
+                <h6>AMC Hybrid Aggressive Fund</h6>
+                <ion-badge color="danger">medium risk</ion-badge>
+              </ion-col>
+              <ion-col class="record-money">
+                <div align="right"><ion-button>More&nbsp;</ion-button></div>
+              </ion-col>
+            </ion-row>
+            <hr>
+        </ion-card-content>
+        
+      </ion-card>
+      <div align="center">
+      <ion-button>Explore ESG Options</ion-button> 
+      <ion-button >CitiBank Investment Support</ion-button> 
+      </div> 
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'sip'">
       <ion-card>
         <ion-item>
           <ion-input placeholder="Enter Amount of Investment" id="investment_amount" [(ngModel)]="investment_amount"  type="number"></ion-input>
@@ -47,7 +118,7 @@
           </ion-select>
         </ion-item>
       </ion-card>
-      <div class="container" id="pad">
+      <div class="container" id="portfolio">
         <ion-button type="submit" expand="block" (click)="loadResult()">Calculate</ion-button>
       </div>
       <div id="result1" class="container res-box">
@@ -64,66 +135,14 @@
       
     </ion-list>
     
-    <ion-list *ngSwitchCase="'puppies'">
-      <ion-card>
-        <ion-item>
-          <ion-select placeholder="Enter Type of Deposit" id="dep_type" [(ngModel)]="dep_type"  >
-            <ion-select-option value="fd">Fixed Deposit</ion-select-option>
-            <ion-select-option value="rd">Recuuring Deposit</ion-select-option>
-            
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-input placeholder="Enter Principal Amount" id="principal_amount" [(ngModel)]="principal_amount"  type="number"></ion-input>
-        </ion-item>
-        
-        <ion-item>
-          <ion-input placeholder="Interest Rate" id="interest_rate"  [(ngModel)]="interest_rate"  type="number"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input placeholder="Investment Period (Years)" id="deposit_period" [(ngModel)]="deposit_period"  type="number"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-select placeholder="Compounding Frequency" id="compounding_freq" [(ngModel)]="compounding_freq"  >
-            <ion-select-option value=12>Monthly</ion-select-option>
-            <ion-select-option value=4>Quarterly</ion-select-option>
-            <ion-select-option value=2>Half Yearly</ion-select-option>
-            <ion-select-option value=1>Yearly</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-card>
-      <div class="container" id="pad">
-        <ion-button type="submit" expand="block" (click)="loadBDResult()">Calculate</ion-button>
+    <div [ngSwitch]="product">
+      <div class="ion-padding" *ngSwitchCase="'sip'">
+        <!-- <ion-card>
+          <ion-card-content>
+            <canvas style="height:300px" height="300" #pieCanvas></canvas> \
+          </ion-card-content>
+        </ion-card> -->
       </div>
-      <div id="result1" class="container res-box">
-        <ion-item>
-        <ion-label>Expected Amount: ₹ {{expected_amount2 | number}}</ion-label>
-        </ion-item>
-        <ion-item>
-        <ion-label>Principal Amount: ₹ {{amount_invested2 | number}}</ion-label>
-        </ion-item>
-        <ion-item>
-        <ion-label>Profit Amount: ₹ {{profit_earned2 | number}}</ion-label>
-        </ion-item>
-      </div>
-      
-    </ion-list>
-
-  </div>
-  <div [ngSwitch]="pet">
-  <div class="ion-padding" *ngSwitchCase="'kittens'">
-    <ion-card>
-      <ion-card-content>
-        <canvas style="height:300px" height="300" #pieCanvas></canvas>
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <div class="ion-padding" *ngSwitchCase="'puppies'">
-    <ion-card>
-      <ion-card-content>
-        <canvas style="height:300px" height="300" #pieCanvas2></canvas>
-      </ion-card-content>
-    </ion-card>
-  </div>
+    </div>
   </div>
 </ion-content>

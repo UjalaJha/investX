@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { DbService } from './../services/db.service';
+import { AlertController } from "@ionic/angular";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -8,34 +9,60 @@ import { DbService } from './../services/db.service';
 })
 export class Tab2Page {
 	mapTax=new Map();
-	defaultYear:any;
-	constructor(private db: DbService){
-		this.defaultYear="22";
+	defaultVal:any;
+  defaultSelect: any;
+	constructor(private router: Router,public alertController: AlertController){
+		this.defaultVal="5";
+    this.defaultSelect="0";
+  }
+  async optionViewClick() {
+    
+    const alert = await this.alertController.create({
+       header: 'Transactions',
+       message: '25-Apr - 1000 - U8999867 <ion-icon name="eye-outline"></ion-icon> <br> 20-Apr - 3000 - U8970899 <ion-icon name="eye-outline"></ion-icon> <br> 15-Apr - 2000 - U8999867 <ion-icon name="eye-outline"></ion-icon>',
+       buttons: ['OK'],
+     });
+ 
+     await alert.present();
+   }
+
+  async optionClick() {
+    
+   const alert = await this.alertController.create({
+      header: 'Default Investment Plan',
+      message: 'AMC Hybrid balanced Fund Plan',
+      buttons: [{  
+        text: 'Change',  
+        role: 'change',  
+        handler: () => {  
+          this.change();
+          console.log('Confirm Cancel');  
+        }  
+      },  
+      {  
+        text: 'Okay',  
+        handler: () => {  
+          console.log('Confirm Okay.');  
+        }  
+      }  ],
+    });
+
+    await alert.present();
   }
 
-  ionViewDidEnter(){
 
-  	this.onChange(this.defaultYear)
+  change(){
+    this.router.navigate(['/tabs/tab3']);
   }
 
-  onChange(year){
-		console.log("Loading Tax for :"+year);
-		this.mapTax=new Map();
-		this.db.getTaxPF(year).then(res=> {
-    		this.mapTax.set(res[0].investment_name,res[0].investment_amount);
-    });
-    this.db.getTaxElss(year).then(res=> {
-    		this.mapTax.set(res[0].investment_name,res[0].investment_amount);
-    });
-    this.db.getTaxSSY(year).then(res=> {
-    		this.mapTax.set(res[0].investment_name,res[0].investment_amount);
-    });
-    this.db.getTaxInsurance(year).then(res=> {
-    		this.mapTax.set('ip',res[0].investment_amount);
-    });
-    this.db.getTaxFD(year).then(res=> {
-    		this.mapTax.set(res[0].investment_name,res[0].investment_amount);
-    });
-	}
-
+  async optionOldClick() {
+    
+    const alert = await this.alertController.create({
+       header: 'Invested Fund : ',
+       message: 'AMC Hybrid balanced Fund Plan',
+       buttons: ['Details', 'OK'],
+     });
+ 
+     await alert.present();
+   }
 }

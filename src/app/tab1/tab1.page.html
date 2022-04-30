@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar  color="primary">
     <ion-title>
-      Track Your Investment
+      Banking
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -16,7 +16,7 @@
   <div padding>
     <ion-segment [(ngModel)]="home"  (ionChange)="onSegmentChange($event)">
       <ion-segment-button value="portfolio">
-        PortFolio 
+        Statement 
       </ion-segment-button>
       <ion-segment-button value="insight">
         Insight
@@ -28,399 +28,111 @@
     <ion-list *ngSwitchCase="'portfolio'">
       <ion-card>
         <ion-item>
-          <ion-label>Provident Fund</ion-label>
-          <ion-button fill="outline" (click)="viewInvestment('ProvidentFund')">View</ion-button><ion-button fill="outline" (click)="addInvestment('ProvidentFund')">Add</ion-button>
+          <ion-label>Saving's Account</ion-label>
         </ion-item>
         <ion-card-content text-wrap>
           <ion-grid class="ion-no-padding">
             <ion-row>
               <ion-col>
-                <div>Total Invested</div>
+                <div>Total Balance</div>
               </ion-col>
               <ion-col>
-                <div align="right">Absolute Returns&nbsp;<span (click)="openModal()"><ion-icon name="create-sharp"></ion-icon></span></div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <h1 color="success">₹ {{mapAmount.get('ProvidentFund') | number}}</h1>
-              </ion-col>
-              <ion-col>
-                <h1 align="right">{{mapAbsReturn.get('ProvidentFund')}}  % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
+                <div align="right">1,80,060.00&nbsp;</div>
               </ion-col>
             </ion-row>
           </ion-grid>
         </ion-card-content>
       </ion-card>
-
       <ion-card>
-        <ion-item>
-          <ion-label>Mutual Fund</ion-label>
-          <ion-button fill="outline" (click)="viewInvestment('MutualFund')">View</ion-button><ion-button fill="outline" (click)="addInvestment('MutualFund')">Add</ion-button>
-        </ion-item>
-
-         <ion-card-content text-wrap>
-          <ion-grid class="ion-no-padding">
-            <ion-row>
-              <ion-col>
-                <div>Total Invested</div>
-              </ion-col>
-              <ion-col>
-                <div align="right">Absolute Returns&nbsp;<ion-icon name="create-sharp"></ion-icon></div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <h1 color="success">₹ {{mapAmount.get('MutualFund') | number}}</h1>
-              </ion-col>
-              <ion-col>
-                <h1 align="right">{{mapAbsReturn.get('MutualFund')}} % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label>Bank Deposit</ion-label>
-          <ion-button fill="outline" (click)="viewInvestment('BankDeposit')">View</ion-button><ion-button fill="outline" (click)="addInvestment('BankDeposit')">Add</ion-button>
-        </ion-item>
-
-        <ion-card-content text-wrap>
-          <ion-grid class="ion-no-padding">
-            <ion-row>
-              <ion-col>
-                <div>Total Invested</div>
-              </ion-col>
-              <ion-col>
-                <div align="right">Absolute Returns&nbsp;<ion-icon name="create-sharp"></ion-icon></div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <h1 color="success">₹  {{mapAmount.get('BankDeposit') | number}}</h1>
-              </ion-col>
-              <ion-col>
-                <h1 align="right">{{mapAbsReturn.get('BankDeposit')}} % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label>CryptoCurrencies</ion-label>
-          <ion-button fill="outline" (click)="viewInvestment('Crypto')">View</ion-button><ion-button fill="outline" (click)="addInvestment('Crypto')">Add</ion-button>
-        </ion-item>
-        <ion-card-content text-wrap>
-          <ion-grid class="ion-no-padding">
-            <ion-row>
-              <ion-col>
-                <div>Total Invested</div>
-              </ion-col>
-              <ion-col>
-                <div align="right">Absolute Returns&nbsp;<ion-icon name="create-sharp"></ion-icon></div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <h1 color="success">₹  {{mapAmount.get('Crypto') | number}}</h1>
-              </ion-col>
-              <ion-col>
-                <h1 align="right">{{mapAbsReturn.get('Crypto')}} % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label>Stocks and Shares</ion-label>
-          <ion-button fill="outline" (click)="viewInvestment('SharesAndStocks')">View</ion-button><ion-button fill="outline" (click)="addInvestment('SharesAndStocks')">Add</ion-button>
-        </ion-item>
-
-        <ion-card-content text-wrap>
-          <ion-grid class="ion-no-padding">
-            <ion-row>
-              <ion-col>
-                <div>Total Invested</div>
-              </ion-col>
-              <ion-col>
-                <div align="right">Absolute Returns&nbsp;<ion-icon name="create-sharp"></ion-icon></div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <h1 color="success">₹  {{mapAmount.get('SharesAndStocks') | number}}</h1>
-              </ion-col>
-              <ion-col>
-                <h1 align="right">{{mapAbsReturn.get('SharesAndStocks')}} % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label>Bonds</ion-label>
-          <ion-button fill="outline" (click)="viewInvestment('Bonds')">View</ion-button><ion-button fill="outline" (click)="addInvestment('Bonds')">Add</ion-button>
-        </ion-item>
-
-        <ion-card-content text-wrap>
-          <ion-grid class="ion-no-padding">
-            <ion-row>
-              <ion-col>
-                <div>Total Invested</div>
-              </ion-col>
-              <ion-col>
-                <div align="right">Absolute Returns&nbsp;<ion-icon name="create-sharp"></ion-icon></div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <h1 color="success">₹  {{mapAmount.get('Bonds') | number}}</h1>
-              </ion-col>
-              <ion-col>
-                <h1 align="right">{{mapAbsReturn.get('Bonds')}} % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label>Commodity</ion-label>
-          <ion-button fill="outline" (click)="viewInvestment('Commodity')">View</ion-button><ion-button fill="outline" (click)="addInvestment('Commodity')">Add</ion-button>
-        </ion-item>
-
-        <ion-card-content text-wrap>
-          <ion-grid class="ion-no-padding">
-            <ion-row>
-              <ion-col>
-                <div>Total Invested</div>
-              </ion-col>
-              <ion-col>
-                <div align="right">Absolute Returns&nbsp;<ion-icon name="create-sharp"></ion-icon></div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <h1 color="success">₹  {{mapAmount.get('Commodity') | number}}</h1>
-              </ion-col>
-              <ion-col>
-                <h1 align="right">{{mapAbsReturn.get('Commodity')}} % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label>LIC</ion-label>
-          <ion-button fill="outline" (click)="viewInvestment('LIC')">View</ion-button><ion-button fill="outline" (click)="addInvestment('LIC')">Add</ion-button>
-        </ion-item>
-
-        <ion-card-content text-wrap>
-          <ion-grid class="ion-no-padding">
-            <ion-row>
-              <ion-col>
-                <div>Total Invested</div>
-              </ion-col>
-              <ion-col>
-                <div align="right">Absolute Returns&nbsp;<ion-icon name="create-sharp"></ion-icon></div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <h1 color="success">₹  {{mapAmount.get('LIC') | number}}</h1>
-              </ion-col>
-              <ion-col>
-                <h1 align="right">{{mapAbsReturn.get('LIC')}} % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label>Insurance</ion-label>
-          <ion-button fill="outline" (click)="viewInvestment('InsurancePlans')">View</ion-button><ion-button fill="outline" (click)="addInvestment('InsurancePlans')">Add</ion-button>
-        </ion-item>
-
-        <ion-card-content text-wrap>
-          <ion-grid class="ion-no-padding">
-            <ion-row>
-              <ion-col>
-                <div>Total Invested</div>
-              </ion-col>
-              <ion-col>
-                <div align="right">Absolute Returns&nbsp;<ion-icon name="create-sharp"></ion-icon></div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <h1 color="success">₹  {{mapAmount.get('InsurancePlans') | number}}</h1>
-              </ion-col>
-              <ion-col>
-                <h1 align="right">{{mapAbsReturn.get('InsurancePlans')}} % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label>ETF</ion-label>
-          <ion-button fill="outline" (click)="viewInvestment('ETF')">View</ion-button><ion-button fill="outline" (click)="addInvestment('ETF')">Add</ion-button>
-        </ion-item>
-
-        <ion-card-content text-wrap>
-          <ion-grid class="ion-no-padding">
-            <ion-row>
-              <ion-col>
-                <div>Total Invested</div>
-              </ion-col>
-              <ion-col>
-                <div align="right">Absolute Returns&nbsp;<ion-icon name="create-sharp"></ion-icon></div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <h1 color="success">₹  {{mapAmount.get('ETF') | number}}</h1>
-              </ion-col>
-              <ion-col>
-                <h1 align="right">{{mapAbsReturn.get('ETF')}} % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label>Retirement Funds</ion-label>
-          <ion-button fill="outline" (click)="viewInvestment('RetirementFund')">View</ion-button><ion-button fill="outline" (click)="addInvestment('RetirementFund')">Add</ion-button>
-        </ion-item>
-
-        <ion-card-content text-wrap>
-          <ion-grid class="ion-no-padding">
-            <ion-row>
-              <ion-col>
-                <div>Total Invested</div>
-              </ion-col>
-              <ion-col>
-                <div align="right">Absolute Returns&nbsp;<ion-icon name="create-sharp"></ion-icon></div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <h1 color="success">₹  {{mapAmount.get('RetirementFund') | number}}</h1>
-              </ion-col>
-              <ion-col>
-                <h1 align="right">{{mapAbsReturn.get('RetirementFund')}} % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label>Childs Future</ion-label>
-          <ion-button fill="outline" (click)="viewInvestment('ChildFutures')">View</ion-button><ion-button fill="outline" (click)="addInvestment('ChildFutures')">Add</ion-button>
-        </ion-item>
-
-        <ion-card-content text-wrap>
-          <ion-grid class="ion-no-padding">
-            <ion-row>
-              <ion-col>
-                <div>Total Invested</div>
-              </ion-col>
-              <ion-col>
-                <div align="right">Absolute Returns&nbsp;<ion-icon name="create-sharp"></ion-icon></div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <h1 color="success">₹  {{mapAmount.get('ChildFutures') | number}}</h1>
-              </ion-col>
-              <ion-col>
-                <h1 align="right">{{mapAbsReturn.get('ChildFutures')}} % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label>Government Schemes</ion-label>
-          <ion-button fill="outline" (click)="viewInvestment('GovernmentFund')">View</ion-button><ion-button fill="outline" (click)="addInvestment('GovernmentFund')">Add</ion-button>
-        </ion-item>
-
-        <ion-card-content text-wrap>
-          <ion-grid class="ion-no-padding">
-            <ion-row>
-              <ion-col>
-                <div>Total Invested</div>
-              </ion-col>
-              <ion-col>
-                <div align="right">Absolute Returns&nbsp;<ion-icon name="create-sharp"></ion-icon></div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <h1 color="success">₹  {{mapAmount.get('GovernmentFund') | number}}</h1>
-              </ion-col>
-              <ion-col>
-                <h1 align="right">{{mapAbsReturn.get('GovernmentFund')}} % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
-          <ion-label>Others</ion-label>
-          <ion-button fill="outline" (click)="viewInvestment('Others')">View</ion-button><ion-button fill="outline" (click)="addInvestment('Others')">Add</ion-button>
-        </ion-item>
-
-        <ion-card-content text-wrap>
-          <ion-grid class="ion-no-padding">
-            <ion-row>
-              <ion-col>
-                <div>Total Invested</div>
-              </ion-col>
-              <ion-col>
-                <div align="right">Absolute Returns&nbsp;<ion-icon name="create-sharp"></ion-icon></div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <h1 color="success">₹  {{mapAmount.get('Others') | number}}</h1>
-              </ion-col>
-              <ion-col>
-                <h1 align="right">{{mapAbsReturn.get('Others')}} % <ion-icon name="trending-up-outline" color="success"></ion-icon></h1>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
+        <h5>Summary</h5>
+        <hr>
+        <ion-row>
+          <ion-col size="6" class="record">
+            <h6>30 Apr 2022</h6>
+            <p>UPI-AMAZON-U8970867 <ion-badge color="primary" (click)="presentPicker()">purchase</ion-badge>&nbsp;</p>
+          </ion-col>
+          <ion-col class="record-money">
+            <div align="right"><ion-label>10,000.00&nbsp;</ion-label><ion-icon name="trending-up-outline" color="danger"></ion-icon></div>
+          </ion-col>
+        </ion-row>
+        <hr>
+        <ion-row>
+          <ion-col size="6" class="record">
+            <h6>30 Apr 2022</h6>
+            <p>UPI-PHARMEASY-U8970899 <ion-badge color="primary" (click)="presentPicker()">health</ion-badge>&nbsp;</p>
+          </ion-col>
+          <ion-col class="record-money">
+            <div align="right"><ion-label>1000.00&nbsp;</ion-label><ion-icon name="trending-up-outline" color="danger"></ion-icon></div>
+          </ion-col>
+        </ion-row>
+        <hr>
+        <ion-row>
+          <ion-col size="6" class="record">
+            <h6>29 Apr 2022</h6>
+            <p>NEFT-RAMESH-U8999867 <ion-badge color="primary" (click)="presentPicker()">transfer</ion-badge>&nbsp;</p>
+          </ion-col>
+          <ion-col class="record-money">
+            <div align="right"><ion-label>20,000.00&nbsp;</ion-label><ion-icon name="trending-up-outline" color="danger"></ion-icon></div>
+          </ion-col>
+        </ion-row>
+        <hr>
+        <ion-row>
+          <ion-col size="6" class="record">
+            <h6>29 Apr 2022</h6>
+            <p>UPI-GROWW-U8999867 <ion-badge color="primary" (click)="presentPicker()">investment</ion-badge>&nbsp;</p>
+          </ion-col>
+          <ion-col class="record-money">
+            <div align="right"><ion-label>30,000.00&nbsp;</ion-label><ion-icon name="trending-up-outline" color="danger"></ion-icon></div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6" class="record">
+            <h6>23 Apr 2022</h6>
+            <p>UPI-MYNTRA-U8999867 <ion-badge color="primary" (click)="presentPicker()">purchase</ion-badge>&nbsp;</p>
+          </ion-col>
+          <ion-col class="record-money">
+            <div align="right"><ion-label>1,500.00&nbsp;</ion-label><ion-icon name="trending-up-outline" color="danger"></ion-icon></div>
+          </ion-col>
+        </ion-row>
+        <hr>
+        <ion-row>
+          <ion-col size="6" class="record">
+            <h6>15 Apr 2022</h6>
+            <p>UPI-AMAZON-U8999867 <ion-badge color="primary" (click)="presentPicker()">purchase</ion-badge>&nbsp;</p>
+          </ion-col>
+          <ion-col class="record-money">
+            <div align="right"><ion-label>800.00&nbsp;</ion-label><ion-icon name="trending-up-outline" color="danger"></ion-icon></div>
+          </ion-col>
+        </ion-row>
+        <hr>
+        <ion-row>
+          <ion-col size="6" class="record">
+            <h6>20 Apr 2022</h6>
+            <p>NEFT-ASHOK-U8999867 <ion-badge color="primary" (click)="presentPicker()">transfer</ion-badge>&nbsp;</p>
+          </ion-col>
+          <ion-col class="record-money">
+            <div align="right"><ion-label>50,000.00&nbsp;</ion-label><ion-icon name="trending-up-outline" color="danger"></ion-icon></div>
+          </ion-col>
+        </ion-row>
+        <hr>
       </ion-card>
     </ion-list>
-    
   </div>
   <div [ngSwitch]="home">
   
     <div class="ion-padding" *ngSwitchCase="'insight'">
+      <h5 align="center">Spending Insights</h5>
+      <ion-item> 
+        <ion-card-subtitle>Month : &nbsp;</ion-card-subtitle>
+        
+       <ion-select #year (ionChange)="onChange(year.value)" [(ngModel)]="defaultVal">
+         <ion-select-option value="0">April 2022</ion-select-option>
+         <ion-select-option value="1">March 2022</ion-select-option>
+         <ion-select-option value="2">February 2022</ion-select-option>
+         <ion-select-option value="2">January 2022</ion-select-option>
+       </ion-select>
+       
+     </ion-item>
      <canvas style="height: 400px" height="400" #pieCanvas></canvas>   
     </div>
   

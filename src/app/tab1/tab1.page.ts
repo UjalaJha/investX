@@ -1,11 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Chart } from "chart.js";
-import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { DbService } from './../services/db.service';
-import { InvestmentOverview } from '../services/investment-overview';
+import { PickerController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { ReturnsModalPage } from '../modals/returns-modal/returns-modal.page';
 
 @Component({
   selector: 'app-tab1',
@@ -13,7 +10,6 @@ import { ReturnsModalPage } from '../modals/returns-modal/returns-modal.page';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-	data: InvestmentOverview[]=[];
 	mapAmount = new Map();
   mapNum = new Map();
   mapAbsReturn = new Map();
@@ -23,7 +19,7 @@ export class Tab1Page {
   dataNum = [];
   dataName=[];
   dataColour=[];
-  
+  defaultVal : any;
 
   @ViewChild("pieCanvas",{static:false}) pieCanvas: ElementRef;
   
@@ -31,86 +27,82 @@ export class Tab1Page {
 
   private pieChart: Chart;
 
-  constructor(private db: DbService,private router: Router,public modalController: ModalController){
+  constructor(private router: Router,public modalController: ModalController,private pickerController: PickerController){
+    this.defaultVal="0";
   }
-
+  private selectedTag: string;
+  async presentPicker() {
+    const picker = await this.pickerController.create({
+  
+      buttons: [
+        {
+          text: 'Confirm',
+          handler: (selected) => {
+            this.selectedTag = selected.animal.value;
+          },
+        }
+      ],
+      columns: [
+        {
+          name: 'options',
+          options: [
+            { text: 'health', value: 'health' },
+            { text: 'purchase', value: 'purchase' },
+            { text: 'transfer', value: 'transfer' },
+            { text: 'investment', value: 'investment' },
+          ]
+        }
+      ]
+    });
+    await picker.present();
+  }
   ngOnInit(){
     console.log('Loading Home Page')
-  	this.db.dbState().subscribe((res) => {
-      console.log("In Tab1Page dbState : ",res);
-	    if(res){
+  	
+      var chartColors = {
+        Purchase: 'rgb(255, 168, 96)',
+        Transfer: 'rgb(168, 216, 168)',
+        Health: 'rgb(96, 192, 168)',
+        Investment: 'rgb(48, 144, 192)',
+        
+        Others: 'rgb(216, 216, 192)',
+      };
+      this.mapNum.clear();
+      this.mapAmount.clear();
+      this.dataAmount = [];
+      this.dataNum = [];
+      this.dataName=[];
+      this.dataColour=[];
+      
 
-	      this.db.fetchInvestmentsDetails().subscribe(item => {
-          console.log("In getInvestmentsDetails Subscriber: ",item);
-          var chartColors = {
-            ProvidentFund: 'rgb(255, 168, 96)',
-            MutualFund: 'rgb(168, 216, 168)',
-            BankDeposit: 'rgb(96, 192, 168)',
-            Crypto: 'rgb(48, 144, 192)',
-            SharesAndStocks: 'rgb(240, 240, 168)',
-            Commodity: 'rgb(240, 120, 72)',
-            Bonds: 'rgb(192, 216, 144)',
-            LIC: 'rgb(144, 192, 216)',
-            InsurancePlans: 'rgb(240, 168, 144)',
-            ETF: 'rgb(240, 216, 168)',
-            RetirementFund: 'rgb(192, 168, 192)',
-            ChildFutures: 'rgb(0, 72, 96)',
-            GovernmentFund: 'rgb(72, 168, 168)',
-            Others: 'rgb(216, 216, 192)',
-          };
-          this.mapNum.clear();
-          this.mapAmount.clear();
-          this.dataAmount = [];
-          this.dataNum = [];
-          this.dataName=[];
-          this.dataColour=[];
-          for (var i = 0; i < item.length; i++) {  
-          		this.mapAmount.set(item[i].investment_name,item[i].investment_amount);
-							this.mapNum.set(item[i].investment_name,item[i].investment_num);
-              this.mapAbsReturn.set(item[i].investment_name,item[i].investment_abs_return);
-              this.dataName.push(item[i].investment_name);
-              this.dataAmount.push(item[i].investment_amount);
-              this.dataNum.push(item[i].investment_num);
-              var colour=item[i].investment_name;
-              this.dataColour.push(chartColors[colour]);
-	      	}
+      this.dataName.push("Purchase");
+      this.dataAmount.push(10000);
+      this.dataNum.push(1);
+      var colour="Purchase";
+      this.dataColour.push(chartColors[colour]);
 
-	      });
-	    }
-	  });
+      this.dataName.push("Transfer");
+      this.dataAmount.push(20000);
+      this.dataNum.push(1);
+      var colour="Transfer";
+      this.dataColour.push(chartColors[colour]);
+      
+      this.dataName.push("Health");
+      this.dataAmount.push(10000);
+      this.dataNum.push(1);
+      var colour="Health";
+      this.dataColour.push(chartColors[colour]);
+
+      this.dataName.push("Investment");
+      this.dataAmount.push(30000);
+      this.dataNum.push(1);
+      var colour="Investment";
+      this.dataColour.push(chartColors[colour]);
+
+
+
   }
-  clickEdit(){
-    this.router.navigate(['/change-return'])
-  }
-  setEditable(item) {
-    item.editable = true;
-  }
-  viewInvestment(investment_name){
-		this.router.navigate(['/view-investment/'+investment_name])
-	}
-
-	addInvestment(investment_name){
-		this.router.navigate(['/add-investment/'+investment_name])
-	}
-
-  async openModal() {
-    const modal = await this.modalController.create({
-      component: ReturnsModalPage,
-      componentProps: {
-        "mapAbsReturn": this.mapAbsReturn
-      }
-    });
-
-    modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null) {
-        this.dataReturned = dataReturned.data;
-        //alert('Modal Sent Data :'+ dataReturned);
-      }
-    });
-
-    return await modal.present();
-  }
-
+  
   onSegmentChange(ev: any) {
     console.log('Segment changed', ev.detail.value);
     if(ev.detail.value=="insight"){
@@ -133,7 +125,7 @@ export class Tab1Page {
           options: {
             title: {
               display: true,
-              text: 'Your Portfolio',
+              text: '',
               fontStyle: 'bold',
               fontFamily : "Montserrat",
               fontSize: 20

@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Chart } from "chart.js";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { DbService } from './../services/db.service';
-import { InvestmentOverview } from '../services/investment-overview';
 import { Router } from '@angular/router';
 import { IonContent } from '@ionic/angular';
 
@@ -32,24 +30,26 @@ export class Tab3Page {
 	dep_type:string="fd";
 
 	@ViewChild("pieCanvas",{static:false}) pieCanvas: ElementRef;
-	
-	@ViewChild("pieCanvas2",{static:false}) pieCanvas2: ElementRef;
 
 	@ViewChild(IonContent, {static: true}) content: IonContent;
 
 	private pieChart: Chart;
 
-	pet: string = "kittens";
+	product: string = "portfolio";
 
   constructor() {
+	  this.investment_amount=1000;
+	  this.investment_roi=10;
+	  this.investment_period=20;
+	  this.inflation="8";
   }
 
 	ngOnInit() {
-	  
-	}
-	ngAfterViewInit() {
 		
-  }
+	}
+	ngAfterViewInit(){
+		this.loadResult();
+  	}
 
 
 	scrollToBottomOnInit() {
@@ -62,36 +62,9 @@ export class Tab3Page {
 		this.amount_invested =  this.result.amount_invested;
 		this.profit_earned = this.result.profit_earned;
 		console.log(this.result);
-		this.scrollToBottomOnInit();
-		this.createGraph(this.amount_invested,this.profit_earned,this.expected_amount);
+		//this.createGraph(this.amount_invested,this.profit_earned,this.expected_amount);
   }
-  loadBDResult(){
-				
-			var depositType=this.dep_type;
-			var amt=this.principal_amount;
-			var rate=this.interest_rate;
-			var year=this.deposit_period;
-			var freq=parseInt(this.compounding_freq);
-			if(depositType == "fd" ){
-				var maturity=amt*Math.pow((1+((rate/100)/freq)), freq*year);
-				this.expected_amount2=Math.round(maturity);
-				this.amount_invested2=Math.round(amt);
-				this.profit_earned2=Math.round(maturity-this.amount_invested2);
-				
-			}else if(depositType == "rd" ){
-				var months=year*12;
-				var maturity=0;
-				for(var i=1; i<=months;i++){
-					maturity+=amt*Math.pow((1+((rate/100)/freq)), freq*((months-i+1)/12));
-				}
-				this.expected_amount2=Math.round(maturity);
-				this.amount_invested2=Math.round(amt*12*year);
-				this.profit_earned2=Math.round(maturity-this.amount_invested2);
-				
-			}
-			this.scrollToBottomOnInit();
-			this.createGraph2(this.amount_invested2,this.profit_earned2,this.expected_amount2);
-	}
+ 
 
   calculateSIP() {
 		var SIP = 0;
@@ -157,7 +130,7 @@ export class Tab3Page {
 	createGraph(principal,profit,expected){
 		const numberWithCommas = x => {
 		  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		  // return Number(x).toLocaleString();
+		  
 		};
   	let ctx = this.pieCanvas.nativeElement;
 		var myChart = new Chart(ctx, {
@@ -205,56 +178,6 @@ export class Tab3Page {
 		  }]
 		});
 	}
-	createGraph2(principal,profit,expected){
-		const numberWithCommas = x => {
-		  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		  // return Number(x).toLocaleString();
-		};
-  	let ctx = this.pieCanvas2.nativeElement;
-		var myChart2 = new Chart(ctx, {
-		  type: 'bar',
-		  data: {
-		    labels:  ['Amount in Rs'],
-		    datasets: [{
-		    	label: 'Invested Amount',
-		      data: [principal],
-          backgroundColor: '#F2AF29',
-		    },
-		    {
-          label: 'Profit Earned',
-          data: [profit],
-          backgroundColor: '#45CB85',
-        }
-        ]
-		  },
-		  options: {
-        scales: {
-          xAxes: [{
-            stacked: true
-          }],
-          yAxes: [{
-            stacked: true
-          }]
-        },
-        tooltips: {
-				  callbacks: {
-						label: function(tooltipItem, data) {
-							let value =
-		          data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-							let op = value.toString();
-							let op2 = op.split(/(?=(?:...)*$)/);
-							let op3 = op2.join(',');
-							return op3;
-						}
-				  } 
-				}
-      },
-		  plugins: [{
-		    beforeInit: function(chart, options) {
-		     
-		    }
-		  }]
-		});
-	}
+	
 
 }

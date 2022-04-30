@@ -7,16 +7,8 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'add-investment/:investment_name',
-    loadChildren: () => import('./add-investment/add-investment.module').then( m => m.AddInvestmentPageModule)
-  },
-  {
-    path: 'view-investment/:investment_name',
-    loadChildren: () => import('./view-investment/view-investment.module').then( m => m.ViewInvestmentPageModule)
-  },
-  {
-    path: 'returns-modal',
-    loadChildren: () => import('./modals/returns-modal/returns-modal.module').then( m => m.ReturnsModalPageModule)
+    path: 'change',
+    loadChildren: () => import('./tab3/tab3.module').then( m => m.Tab3PageModule)
   }
 ];
 @NgModule({
